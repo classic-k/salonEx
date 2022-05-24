@@ -1,0 +1,23 @@
+{
+  "name": "salonex",
+  "version": "1.0.0",
+  "description": "Find salon close to you and book appointment",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/classic-k/salonEx.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/classic-k/salonEx/issues"
+  },
+  "homepage": "https://github.com/classic-k/salonEx#readme",
+  "dependencies": {
+    "express": "^4.18.1"
+  }
+}
