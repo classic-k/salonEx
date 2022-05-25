@@ -3,7 +3,6 @@ import session from "express-session";
 import "dotenv/config";
 import mongoose from "mongoose";
 import cookieParser from "cookie-parser";
-import csrf from "csurf";
 import MongoStore from "connect-mongo";
 import passport from "passport";
 import { init_passport, Auth_User } from "./controller/auth/passport-config.js";
@@ -42,7 +41,6 @@ app.get("/", (req, res) => {
   res.send("Welcome to home land");
 });
 app.use("/user", userRouter);
-app.use(csrf());
 app.listen(5000, () => {
   console.log("Loaded");
 });
