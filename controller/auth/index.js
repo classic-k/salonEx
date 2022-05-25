@@ -1,3 +1,4 @@
+import passport from "passport";
 const Register = (req, res, next) => {
   console.log("Registration");
 };
