@@ -6,12 +6,9 @@ const users = new mongoose.Schema(
     lastname: { type: String, required: true },
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
-    address: { type: String, required: false },
-    city: { type: String, required: false },
-    postalCode: { type: String, required: false },
-    country: { type: String, required: false, default: "Nigeria" },
     phone: { type: String, required: true },
-    //coordinate:{ type: String, required: false, unique: true },
+
+    sex: { type: String, required: true },
   },
   {
     timestamps: true,
