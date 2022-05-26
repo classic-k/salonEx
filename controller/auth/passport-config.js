@@ -39,8 +39,16 @@ export const init_passport = (passport) => {
 };
 
 export const Auth_User = (req, res, next) => {
-  if ((req.isAutheb = nticated())) {
+  if (req.isAuthenticated()) {
     return next();
   }
   return res.redirect("/login");
+};
+
+export const IsOwner = (req, res, next) => {
+  if (req.isAuthenticated()) {
+    // get owner session ID
+    return next();
+  }
+  return res.redirect("/");
 };

@@ -3,3 +3,7 @@ Do owner login and reg features
 test run (reg and login)
 And DO data adding to map via owner reg and fetching via user search
 Cache server(Save user locations after booking)
+
+Create Owner and populate owner controller
+
+Create map connection and kick start loading data via Owner reg
