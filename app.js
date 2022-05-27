@@ -10,26 +10,36 @@ import userRouter from "./routes/userRoute.js";
 
 const app = express();
 init_passport(passport);
+
 mongoose
   .connect(process.env.MONGODB, {
     useNewUrlParser: true,
   })
   .then(() => {
     console.log("Done");
+  })
+  .catch((err) => {
+    console.log(err);
   });
 
-app.use(
-  session({
-    store: MongoStore.create({
-      mongoUrl: process.env.MONGODB,
-      collectionName: "sessions",
-    }),
-    secret: process.env.SESSION_SECRET,
-    resave: false,
-    saveUninitialized: false,
-    cookie: { secure: false, maxAge: 60000 * 60 * 24 },
-  })
-);
+app.set("views", "public");
+app.set("view engine", "ejb");
+try {
+  app.use(
+    session({
+      store: MongoStore.create({
+        mongoUrl: process.env.MONGODB,
+        collectionName: "sessions",
+      }),
+      secret: process.env.SESSION_SECRET,
+      resave: false,
+      saveUninitialized: false,
+      cookie: { secure: false, maxAge: 60000 * 60 * 24 },
+    })
+  );
+} catch (err) {
+  console.log("Police");
+}
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());

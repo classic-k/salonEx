@@ -3,15 +3,15 @@ import passport from "passport";
 import { Register } from "../controller/auth/index.js";
 
 const userRouter = express.Router();
-/*
+
 userRouter.get("/login", (req, res) => {
-  res.render("users/login.html");
+  res.render("users/login.ejb");
 });
 
 userRouter.get("/register", (req, res) => {
-  res.render("users/register");
+  res.render("users/register.ejb");
 });
-*/
+
 userRouter.post(
   "/login",
   passport.authenticate("local", {

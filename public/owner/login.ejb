@@ -21,6 +21,7 @@
           name="password"
           type="password"
         />
+        <input type="hidden" name="tok" value="AIzaSyA8" />
       </div>
       <div className="custom-control custom-checkbox  text-left mb-4 mt-2">
         <button type="submit">Login</button>
