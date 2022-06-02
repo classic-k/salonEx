@@ -1,0 +1,158 @@
+<html>
+  <head>
+    <title>Registration Page</title>
+  </head>
+  <script>
+    function geo_req() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(suc, er);
+      }
+    }
+
+    const suc = (cord) => {
+      console.log("Success");
+      console.log(cord);
+      window["lon"].value = cord.coords.longitude;
+      window["lat"].value = cord.coords.latitude;
+    };
+
+    const er = (err) => {
+      console.log("err");
+      console.log(err);
+    };
+  </script>
+  <body onload="geo_req()">
+    <div className="container">
+      <div className="title_container">
+        <h2>Salon Registration Form</h2>
+      </div>
+
+      <form method="post" action="/user/register">
+        <div className="row clearfix">
+          <div className="col_half">
+            <div className="input_field">
+              <span><i aria-hidden="true" className="fa fa-user"></i></span>
+              <input
+                type="text"
+                name="name"
+                placeholder="Salon Name"
+                required
+              />
+            </div>
+          </div>
+        </div>
+
+        <div className="row clearfix">
+          <div className="col_half">
+            <div className="input_field">
+              <span><i aria-hidden="true" className="fa fa-user"></i></span>
+              <input type="text" name="phone" placeholder="Your Phone" />
+            </div>
+          </div>
+        </div>
+
+        <div className="row clearfix">
+          <div className="col_half">
+            <div className="input_field">
+              <span><i aria-hidden="true" className="fa fa-user"></i></span>
+              <input
+                type="password"
+                name="password"
+                placeholder="Password"
+                required
+              />
+            </div>
+          </div>
+        </div>
+
+        <div className="row clearfix">
+          <div className="col_half">
+            <div className="input_field">
+              <span><i aria-hidden="true" className="fa fa-user"></i></span>
+              <input
+                type="password"
+                name="cpassword"
+                placeholder="Re-type
+              Password"
+                required
+              />
+            </div>
+          </div>
+        </div>
+
+        <div className="row clearfix">
+          <div className="col_half">
+            <div className="input_field">
+              <span><i aria-hidden="true" className="fa fa-user"></i></span>
+              <input type="email" name="email" placeholder="Email Address" />
+            </div>
+          </div>
+        </div>
+
+        <div className="row clearfix">
+          <div className="col_half">
+            <div className="input_field">
+              <span><i aria-hidden="true" className="fa fa-user"></i></span>
+              <input type="text" name="brand" placeholder="Brand Name" />
+            </div>
+          </div>
+        </div>
+
+        <div className="row clearfix">
+          <div className="col_half">
+            <div className="input_field">
+              <span><i aria-hidden="true" className="fa fa-user"></i></span>
+              <input type="text" name="address" placeholder="Location" />
+            </div>
+          </div>
+        </div>
+        <div className="row clearfix">
+          <div className="col_half">
+            <div className="input_field">
+              <span><i aria-hidden="true" className="fa fa-user"></i></span>
+              <input type="text" name="city" placeholder="City" />
+              <input
+                type="hidden"
+                name="lon"
+                placeholder="Longitude"
+                id="lon"
+              />
+              <input type="hidden" name="lat" placeholder="Latitude" id="lat" />
+            </div>
+          </div>
+        </div>
+
+        <div className="row clearfix">
+          <div className="col_half">
+            <div className="input_field">
+              <span><i aria-hidden="true" className="fa fa-user"></i></span>
+              <textarea
+                name="desc"
+                rol="15"
+                cols="15"
+                placeholder="Description"
+              ></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div className="row clearfix">
+          <div className="col_half">
+            <div className="input_field">
+              <span><i aria-hidden="true" className="fa fa-user"></i></span>
+              <div className="input_field radio_option">
+                <input type="radio" name="sex" id="rd1" value="0" />
+                <span>Male</span>
+                <input type="radio" name="sex" id="rd2" value="1" />
+                <span>Female</span>
+                <input type="radio" name="sex" id="rd2" value="2" />
+                <span>Unisex</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <input className="button" type="submit" value="Register" />
+      </form>
+    </div>
+  </body>
+</html>

@@ -7,8 +7,11 @@ import MongoStore from "connect-mongo";
 import passport from "passport";
 import { init_passport, Auth_User } from "./controller/auth/passport-config.js";
 import userRouter from "./routes/userRoute.js";
+import mapRouter from "./routes/mapRoute.js";
 
 const app = express();
+
+/*
 init_passport(passport);
 
 mongoose
@@ -40,17 +43,20 @@ try {
 } catch (err) {
   console.log("Police");
 }
+
+*/
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 //
 app.use(express.static("public"));
-app.use(passport.initialize());
-app.use(passport.session());
+//app.use(passport.initialize());
+//app.use(passport.session());
 app.get("/", (req, res) => {
   res.send("Welcome to home land");
 });
-app.use("/user", userRouter);
+app.use("/map", mapRouter);
+//app.use("/user", userRouter);
 app.listen(5000, () => {
   console.log("Loaded");
 });
