@@ -1,0 +1,122 @@
+<html>
+  <head>
+    <title>Registration Page</title>
+  </head>
+  <body>
+    <div className="container">
+      <div className="title_container">
+        <h2>Responsive Registration Form</h2>
+      </div>
+
+      <form method="post" action="/user/register">
+        <div className="row clearfix">
+          <div className="col_half">
+            <div className="input_field">
+              <span><i aria-hidden="true" className="fa fa-user"></i></span>
+              <input
+                type="text"
+                name="firstname"
+                placeholder="Firstname"
+                required
+              />
+            </div>
+          </div>
+        </div>
+
+        <div className="row clearfix">
+          <div className="col_half">
+            <div className="input_field">
+              <span><i aria-hidden="true" className="fa fa-user"></i></span>
+              <input
+                type="text"
+                name="lastname"
+                placeholder="Lastname"
+                required
+              />
+            </div>
+          </div>
+        </div>
+
+        <div className="row clearfix">
+          <div className="col_half">
+            <div className="input_field">
+              <span><i aria-hidden="true" className="fa fa-user"></i></span>
+              <input type="text" name="phone" placeholder="Your Phone" />
+            </div>
+          </div>
+        </div>
+
+        <div className="row clearfix">
+          <div className="col_half">
+            <div className="input_field">
+              <span><i aria-hidden="true" className="fa fa-user"></i></span>
+              <input
+                type="password"
+                name="password"
+                placeholder="Password"
+                required
+              />
+            </div>
+          </div>
+        </div>
+
+        <div className="row clearfix">
+          <div className="col_half">
+            <div className="input_field">
+              <span><i aria-hidden="true" className="fa fa-user"></i></span>
+              <input
+                type="password"
+                name="cpassword"
+                placeholder="Re-type
+              Password"
+                required
+              />
+            </div>
+          </div>
+        </div>
+
+        <div className="row clearfix">
+          <div className="col_half">
+            <div className="input_field">
+              <span><i aria-hidden="true" className="fa fa-user"></i></span>
+              <input type="email" name="email" placeholder="Email Address" />
+            </div>
+          </div>
+        </div>
+
+        <div className="row clearfix">
+          <div className="col_half">
+            <div className="input_field">
+              <span><i aria-hidden="true" className="fa fa-user"></i></span>
+              <input type="text" name="brand" placeholder="Brand Name" />
+            </div>
+          </div>
+        </div>
+
+        <div className="row clearfix">
+          <div className="col_half">
+            <div className="input_field">
+              <span><i aria-hidden="true" className="fa fa-user"></i></span>
+              <input type="text" name="website" placeholder="Websites if any" />
+            </div>
+          </div>
+        </div>
+
+        <div className="row clearfix">
+          <div className="col_half">
+            <div className="input_field">
+              <span><i aria-hidden="true" className="fa fa-user"></i></span>
+              <div className="input_field radio_option">
+                <input type="radio" name="sex" id="rd1" value="male" />
+                <span>Male</span>
+                <input type="radio" name="sex" id="rd2" value="female" />
+                <span>Female</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <input className="button" type="submit" value="Register" />
+      </form>
+    </div>
+  </body>
+</html>

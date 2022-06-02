@@ -7,7 +7,7 @@ import MongoStore from "connect-mongo";
 import passport from "passport";
 import { init_passport, Auth_User } from "./controller/auth/passport-config.js";
 import userRouter from "./routes/userRoute.js";
-import mapRouter from "./routes/mapRoute.js";
+//import mapRouter from "./routes/mapRoute.js";
 
 const app = express();
 
@@ -25,8 +25,6 @@ mongoose
     console.log(err);
   });
 
-app.set("views", "public");
-app.set("view engine", "ejb");
 try {
   app.use(
     session({
@@ -43,20 +41,21 @@ try {
 } catch (err) {
   console.log("Police");
 }
-
 */
+app.set("views", "public");
+app.set("view engine", "ejs");
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
-//
+
 app.use(express.static("public"));
 //app.use(passport.initialize());
 //app.use(passport.session());
 app.get("/", (req, res) => {
-  res.send("Welcome to home land");
+  res.render("index.ejs");
 });
-app.use("/map", mapRouter);
-//app.use("/user", userRouter);
+//app.use("/map", mapRouter);
+app.use("/user", userRouter);
 app.listen(5000, () => {
   console.log("Loaded");
 });

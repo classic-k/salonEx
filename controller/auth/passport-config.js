@@ -9,7 +9,7 @@ export const init_passport = (passport) => {
     new LocalStrategy(
       { passReqToCallback: true },
       async (req, username, password, cb) => {
-        const user = await User.findone({ email: username });
+        const user = await User.findOne({ email: username });
         if (user) {
           try {
             //const hashedPassword = encryptPassword(password, user.salt);
@@ -34,6 +34,9 @@ export const init_passport = (passport) => {
           } catch (err) {
             console.log(err);
             return cb(null, false, { message: "An error occur" });
+          } finally {
+            console.log(username, password);
+            console.log(req.headers);
           }
         } else {
           return cb(null, false, { message: "Invalid username or password" });
@@ -43,11 +46,11 @@ export const init_passport = (passport) => {
   );
 
   passport.serializeUser((user, done) => {
-    return done(null, user.id);
+    return done(null, user._id);
   });
 
   passport.deserializeUser(async function (id, done) {
-    const userId = await User.findOne({ where: { id: id } });
+    const userId = await User.findOne({ where: { _id: id } });
     try {
       return done(null, userId);
     } catch (err) {
