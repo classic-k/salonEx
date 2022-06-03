@@ -1,7 +1,9 @@
 import expressAsyncHandler from "express-async-handler";
-import User from "../../models/users/userModel.js";
+import User from "../../../models/users/userModel.js";
 import bcrypt from "bcryptjs";
 import Owner from "../../../models/users/ownerModel.js";
+import Salon from "../../../models/salon/salonModel.js";
+
 export const Register = expressAsyncHandler(async (req, res, next) => {
   let fname = req.body.firstname;
   let lname = req.body.lastname;

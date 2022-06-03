@@ -1,29 +1,39 @@
 import LocalStrategy from "passport-local";
 import User from "../../models/users/userModel.js";
-import Owner from "../../models/users/ownerModel.js";
-import { encryptPassword } from "../../utils/util.js";
 import bcrypt from "bcryptjs";
+import Owner from "../../models/users/ownerModel.js";
 
 export const init_passport = (passport) => {
   passport.use(
     new LocalStrategy(
       { passReqToCallback: true },
       async (req, username, password, cb) => {
+        // console.log(username, password);
         const user = await User.findOne({ email: username });
+
         if (user) {
           try {
             //const hashedPassword = encryptPassword(password, user.salt);
-            if (bcrypt.compareSync(password, user.password)) {
+            if (!bcrypt.compareSync(password, user.password)) {
               return cb(null, false, {
                 message: "Invalid username or password",
               });
             }
+
             if (req.body.tok) {
               const tok = req.body.tok;
               if (tok == "AIzaSyA8") {
-                const owner = await Owner.findone({ user: user });
+                const owner = await Owner.findOne({ user: user });
                 if (owner) {
-                  req.session["owner"] = owner.id;
+                  return cb(
+                    null,
+                    {
+                      username: user.email,
+                      owner: owner.id,
+                      id: user.id,
+                    },
+                    { message: "Successful" }
+                  );
                 } else
                   return cb(null, false, {
                     message: "Invalid username or password",
@@ -32,11 +42,7 @@ export const init_passport = (passport) => {
             }
             return cb(null, user, { message: "Successful" });
           } catch (err) {
-            console.log(err);
-            return cb(null, false, { message: "An error occur" });
-          } finally {
-            console.log(username, password);
-            console.log(req.headers);
+            return cb(err, false, { message: "An error occur" });
           }
         } else {
           return cb(null, false, { message: "Invalid username or password" });
@@ -45,31 +51,56 @@ export const init_passport = (passport) => {
     )
   );
 
-  passport.serializeUser((user, done) => {
-    return done(null, user._id);
+  passport.serializeUser((user, cb) => {
+    process.nextTick(() => {
+      if (typeof user.owner !== "undefined") {
+        return cb(null, {
+          id: user.id,
+          username: user.username,
+          owner: user.owner,
+        });
+      }
+      return cb(null, { id: user.id, username: user.email });
+    });
   });
 
-  passport.deserializeUser(async function (id, done) {
-    const userId = await User.findOne({ where: { _id: id } });
-    try {
-      return done(null, userId);
-    } catch (err) {
-      return done(err);
-    }
+  passport.deserializeUser(function (user, cb) {
+    process.nextTick(() => cb(null, user));
   });
 };
 
 export const Auth_User = (req, res, next) => {
+  console.log("user", req.user);
   if (req.isAuthenticated()) {
     return next();
   }
-  return res.redirect("/login");
+  const url = req.baseUrl;
+  if (url.indexOf("user") > 0) {
+    return res.redirect("/user/login");
+  } else if (url.indexOf("owner") > 0) {
+    console.log("From auth");
+    return res.redirect("/owner/login");
+  } else {
+    return res.redirect("/");
+  }
 };
 
-export const IsOwner = (req, res, next) => {
-  if (req.isAuthenticated()) {
-    // get owner session ID
-    return next();
+export const IsOwner = async (req, res, next) => {
+  const user = req.user;
+  console.log(user);
+  if (typeof user.owner !== "undefined") {
+    const ID = user.owner;
+
+    const owner = await Owner.findOne({ id: ID });
+    if (owner) {
+      return next();
+    }
+
+    req.logout();
+    return res.redirect("/");
   }
-  return res.redirect("/");
+  console.log("From own");
+  return res.redirect("/owner/login");
 };
+
+export const authOwner = [Auth_User, IsOwner];

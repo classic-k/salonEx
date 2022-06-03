@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import Owner from "./ownerModel";
+import Owner from "../users/ownerModel.js";
 
 const salons = new mongoose.Schema(
   {
@@ -11,7 +11,7 @@ const salons = new mongoose.Schema(
     coordinate: { type: Map, required: true },
     phone: { type: String, required: true },
     description: { type: String, required: true },
-    sex: { type: int, required: true },
+    sex: { type: Number, required: true },
     admin: {
       type: mongoose.Schema.Types.ObjectId,
       ref: Owner,

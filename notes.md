@@ -8,4 +8,5 @@ Create Owner and populate owner controller
 
 Create map connection and kick start loading data via Owner reg
 
-Maps: 
+Maps:
+Understand how passport write headers and midleware use

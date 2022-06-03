@@ -5,7 +5,10 @@
   <body>
     <div className="container">
       <div className="title_container">
-        <h2>Responsive Registration Form</h2>
+        <h2>
+          Salon Registration: Access to location required and must be salon
+          location
+        </h2>
       </div>
 
       <form method="post" action="/user/register">
@@ -15,8 +18,8 @@
               <span><i aria-hidden="true" className="fa fa-user"></i></span>
               <input
                 type="text"
-                name="firstname"
-                placeholder="Firstname"
+                name="name"
+                placeholder="Salon Name"
                 required
               />
             </div>
@@ -27,12 +30,7 @@
           <div className="col_half">
             <div className="input_field">
               <span><i aria-hidden="true" className="fa fa-user"></i></span>
-              <input
-                type="text"
-                name="lastname"
-                placeholder="Lastname"
-                required
-              />
+              <input type="text" name="city" placeholder="city" required />
             </div>
           </div>
         </div>
@@ -88,7 +86,7 @@
           <div className="col_half">
             <div className="input_field">
               <span><i aria-hidden="true" className="fa fa-user"></i></span>
-              <input type="text" name="brand" placeholder="Brand Name" />
+              <input type="text" name="address" placeholder="Address" />
             </div>
           </div>
         </div>
@@ -111,6 +109,23 @@
                 <span>Male</span>
                 <input type="radio" name="sex" id="rd2" value="female" />
                 <span>Female</span>
+                <input type="radio" name="sex" id="rd2" value="unisex" />
+                <span>Unisex</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="row clearfix">
+          <div className="col_half">
+            <div className="input_field">
+              <div className="input_field radio_option">
+                <input type="radio" name="sex" id="rd1" value="male" />
+                <span>Male</span>
+                <input type="radio" name="sex" id="rd2" value="female" />
+                <span>Female</span>
+                <input type="radio" name="sex" id="rd2" value="unisex" />
+                <span>Unisex</span>
               </div>
             </div>
           </div>

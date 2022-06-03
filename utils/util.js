@@ -41,3 +41,9 @@ export const encryptPassword = (password, salt) => {
   });
   return arr;
 };
+
+export const chkSession = (req, res, next) => {
+  if (req.session) console.log("Session is set");
+  else console.log("Session not set");
+  next();
+};

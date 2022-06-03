@@ -1,6 +1,7 @@
 import express from "express";
 import passport from "passport";
 import { Register } from "../controller/auth/index.js";
+import { Auth_User } from "../controller/auth/passport-config.js";
 
 const userRouter = express.Router();
 
@@ -12,7 +13,7 @@ userRouter.get("/register", (req, res) => {
   res.render("users/register.ejs");
 });
 
-userRouter.get("/dash", (req, res) => {
+userRouter.get("/dash", Auth_User, (req, res) => {
   res.send("Welcome to dashborad");
 });
 userRouter.post(
