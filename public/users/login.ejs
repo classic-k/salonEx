@@ -3,6 +3,11 @@
     <title>Login Page</title>
   </head>
   <body>
+    <% if (typeof msg !== 'undefined') { %>
+    <h2><%= msg %></h2>
+    <% } else { %>
+    <h3>Login Below</h3>
+    <% } %>
     <form method="post" action="/user/login">
       <div className="form-group mb-3">
         <input

@@ -1,41 +1,27 @@
 import express from "express";
-import session from "express-session";
+import session, { MemoryStore } from "express-session";
 import "dotenv/config";
-import mongoose from "mongoose";
 import cookieParser from "cookie-parser";
-import MongoStore from "connect-mongo";
 import passport from "passport";
-import { init_passport, Auth_User } from "./controller/auth/passport-config.js";
+import { init_passport, sqlPass } from "./controller/auth/passport-config.js";
 import userRouter from "./routes/userRoute.js";
 import ownerRouter from "./routes/ownerRoute.js";
+import { SQLite } from "./models/connect.js";
 //import { chkSession } from "./utils/util.js";
 
 const app = express();
 
-init_passport(passport);
-
-mongoose
-  .connect(process.env.MONGODB, {
-    useNewUrlParser: true,
-  })
-  .then(() => {
-    console.log("Done");
-  })
-  .catch((err) => {
-    console.log(err);
-  });
+sqlPass(passport);
+SQLite();
 
 try {
   app.use(
     session({
-      store: MongoStore.create({
-        mongoUrl: process.env.MONGODB,
-        collectionName: "sessions",
-      }),
+      store: new MemoryStore(),
       secret: process.env.SESSION_SECRET,
       resave: false,
       saveUninitialized: false,
-      cookie: { secure: true, maxAge: 60000 * 60 * 24 },
+      cookie: { secure: false, maxAge: 60000 * 60 * 24 },
     })
   );
 } catch (err) {
