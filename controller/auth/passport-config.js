@@ -1,8 +1,8 @@
 import LocalStrategy from "passport-local";
 import User from "../../models/users/userModel.js";
-import bcrypt from "bcryptjs";
+import { compareHash, hashStr } from "../../utils/util.js";
 import Owner from "../../models/users/ownerModel.js";
-import { vetOwner, vetUser } from "../../models/sqlite/index.js";
+import bcrypt from "bcryptjs";
 
 export const init_passport = (passport) => {
   passport.use(
@@ -10,10 +10,12 @@ export const init_passport = (passport) => {
       { passReqToCallback: true },
       async (req, username, password, cb) => {
         try {
+          const url = req.originalUrl.toLowerCase();
           const user = await User.findOne({ email: username });
+
           if (user) {
-            if (bcrypt.compareSync(password, user.password)) {
-              if (req.body.tok && req.body.tok == "") {
+            if (compareHash(password, user.password)) {
+              if (url.indexOf("owner") > 0) {
                 const owner = await Owner.findOne({ user: user });
                 if (owner) {
                   return cb(null, {
@@ -39,7 +41,6 @@ export const init_passport = (passport) => {
 
   passport.serializeUser((user, cb) => {
     process.nextTick(() => {
-      // console.log(user);
       if (typeof user.owner !== "undefined") {
         return cb(null, {
           id: user.id,
@@ -55,51 +56,8 @@ export const init_passport = (passport) => {
     process.nextTick(() => cb(null, user));
   });
 };
-export const sqlPass = (passport) => {
-  passport.use(
-    new LocalStrategy(
-      { passReqToCallback: true },
-      async (req, username, password, cb) => {
-        const url = req.originalUrl;
 
-        try {
-          if (url.indexOf("owner") > 0) {
-            console.log("Owner log");
-            const owner = vetOwner(username, password);
-            if (owner) {
-              return cb(null, owner);
-            }
-            return cb(null, false);
-          } else {
-            //  console.log("User log");
-            const user = vetUser(username, password);
-            if (user) {
-              return cb(null, user);
-            }
-            console.log("Ret", user);
-            return cb(null, false);
-          }
-        } catch (err) {
-          console.log(err);
-          return cb(err);
-        }
-      }
-    )
-  );
-
-  passport.serializeUser((user, cb) => {
-    process.nextTick(() => {
-      console.log(user);
-      return cb(null, { id: user.id, username: user.email });
-    });
-  });
-
-  passport.deserializeUser(function (user, cb) {
-    process.nextTick(() => cb(null, user));
-  });
-};
 export const Auth_User = (req, res, next) => {
-  console.log("user", req.user);
   if (req.isAuthenticated()) {
     return next();
   }
@@ -117,7 +75,6 @@ export const Auth_User = (req, res, next) => {
 export const IsOwner = async (req, res, next) => {
   const user = req.user;
   if (typeof user === "undefined") {
-    console.log("User not defined");
     if (req.logOut) req.logOut();
     return res.redirect("/");
   } else {

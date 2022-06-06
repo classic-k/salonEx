@@ -1,30 +1,35 @@
-const getLocation = () => {
-  navigator.geolocation.getCurrentPosition(
+const getLocation = async () => {
+  const coord = navigator.geolocation.getCurrentPosition(
     (coords) => {
       console.log(coords);
-      return coords;
+      return coords.coord;
     },
     (err) => {
       console.log(err);
-
-      return { err: err };
     }
   );
+
+  const geo = { lat: coord.latitude, long: coord.longitude };
+  const loc = reverse("location", geo);
+
+  return loc;
 };
-const api = "http://127.0.0.1:5000/map/proxy";
-const proxy = (url, type) => {
-  url = api + "?url=" + url;
-  const tok = localStorage.getItem("token");
-  const cookies = document.cookie;
-  return {
-    url: url,
-    credentials: "same-origin",
-    headers: {
-      referral: "",
-      token: tok,
-      cookie: cookies,
-    },
-  };
+
+const api = "http://127.0.0.1:5000/api/";
+const reverse = (url, data) => {
+  url = api + url;
+
+  fetch(url, { method: "post", body: json.Stringify(data) })
+    .then((data) => {
+      return data.json();
+    })
+    .then((data) => {
+      console.log(data);
+      return data;
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 };
 
 const createMap = (con, coord) => {

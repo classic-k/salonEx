@@ -85,7 +85,6 @@ export const query = () => {
   });
 };
 export const vetUser = (username, password, rows = []) => {
-  return false;
   db.serialize(() => {
     try {
       username = username.trim();

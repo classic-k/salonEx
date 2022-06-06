@@ -3,6 +3,7 @@
     <title>Registration Page</title>
   </head>
   <script>
+    /*
     function geo_req() {
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(suc, er);
@@ -20,8 +21,46 @@
       console.log("err");
       console.log(err);
     };
+*/
+    var api = "http://127.0.0.1:5000/api/";
+    async function geoLocation() {
+      const loc = navigator.geolocation.getCurrentPosition(
+        (coords) => {
+          let coord = coords.coords;
+          const geo = { lat: coord.latitude, long: coord.longitude };
+          const loc = reverse("location", geo);
+          console.log(loc);
+          return loc;
+        },
+        (err) => {
+          console.log(err);
+        }
+      );
+
+      return loc;
+    }
+
+    function reverse(url, data) {
+      url = api + url;
+
+      fetch(url, {
+        method: "post",
+        body: JSON.stringify(data),
+        headers: { "Content-Type": "application/json" },
+      })
+        .then((data) => {
+          return data.json();
+        })
+        .then((data) => {
+          console.log(data);
+          return data;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   </script>
-  <body onload="geo_req()">
+  <body onload="geoLocation()">
     <div className="container">
       <div className="title_container">
         <h2>Salon Registration Form</h2>

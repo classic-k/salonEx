@@ -3,16 +3,16 @@ import session, { MemoryStore } from "express-session";
 import "dotenv/config";
 import cookieParser from "cookie-parser";
 import passport from "passport";
-import { init_passport, sqlPass } from "./controller/auth/passport-config.js";
+import { init_passport } from "./controller/auth/passport-config.js";
 import userRouter from "./routes/userRoute.js";
 import ownerRouter from "./routes/ownerRoute.js";
-import { SQLite } from "./models/connect.js";
-//import { chkSession } from "./utils/util.js";
+import apiRouter from "./routes/apiRoute.js";
+import { MDB } from "./models/connect.js";
 
 const app = express();
 
-sqlPass(passport);
-SQLite();
+init_passport(passport);
+MDB();
 
 try {
   app.use(
@@ -40,7 +40,7 @@ app.use(passport.session());
 app.get("/", (req, res) => {
   res.render("index.ejs");
 });
-//app.use("/map", mapRouter);
+app.use("/api", apiRouter);
 app.use("/user", userRouter);
 app.use("/owner", ownerRouter);
 app.listen(5000, () => {

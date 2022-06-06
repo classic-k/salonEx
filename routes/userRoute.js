@@ -1,6 +1,6 @@
 import express from "express";
 import passport from "passport";
-import { Register, RegUser } from "../controller/auth/index.js";
+import { Register } from "../controller/auth/index.js";
 import { Auth_User } from "../controller/auth/passport-config.js";
 import { query } from "express";
 
@@ -33,10 +33,10 @@ userRouter.get("/miscel", (req, res) => {
   res.send("Done");
 });
 
-userRouter.get("/dash", (req, res) => {
-  console.log(req.session);
+userRouter.get("/dash", Auth_User, (req, res) => {
   res.send("Welcome to dashborad");
 });
+
 userRouter.post(
   "/login",
   passport.authenticate("local", {
@@ -45,11 +45,10 @@ userRouter.post(
     failureRedirect: "/user/login",
   }),
   (req, res) => {
-    console.log(req.session.messages);
-
-    res.redirect("/user/dash", 302);
+    res.redirect(302, "/user/dash");
   }
 );
-userRouter.post("/register", RegUser);
+
+userRouter.post("/register", Register);
 
 export default userRouter;

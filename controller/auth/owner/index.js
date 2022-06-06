@@ -1,8 +1,7 @@
 import expressAsyncHandler from "express-async-handler";
 import User from "../../../models/users/userModel.js";
-import bcrypt from "bcryptjs";
 import Owner from "../../../models/users/ownerModel.js";
-import Salon from "../../../models/salon/salonModel.js";
+import { hashStr } from "../../../utils/util.js";
 
 export const Register = expressAsyncHandler(async (req, res, next) => {
   let fname = req.body.firstname;
@@ -12,7 +11,7 @@ export const Register = expressAsyncHandler(async (req, res, next) => {
   let phone = req.body.phone;
   let sex = req.body.sex;
 
-  password = bcrypt.hashSync(password, 10);
+  password = hashStr(password);
 
   const mail_exists = await User.findOne({ email: req.body.email });
   if (mail_exists) {
