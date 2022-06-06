@@ -8,5 +8,6 @@ export const Sex = {
 
 export const endpoints = {
   reverse:
-    "https://atlas.microsoft.com/search/address/reverse/json?api-version=1.0&language=en-US&number=1&subscription-key=",
+    "https://atlas.microsoft.com/search/address/reverse/json?typeahead=true&api-version=1.0&language=en-US&number=1&entityType=Municipality&subscription-key=",
+  batchReverse: "",
 };

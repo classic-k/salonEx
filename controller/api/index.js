@@ -1,19 +1,24 @@
 import expressAsyncHandler from "express-async-handler";
-import { endpoints } from "../../utils/constants.js";
-import axios from "axios";
+import { reverse, loader, BatchReverse as BR } from "../map/index.js";
+import { GetByMunicipal } from "../salon/index.js";
 
-export const reverse = expressAsyncHandler(async (req, res) => {
+export const Reverse = expressAsyncHandler(async (req, res) => {
   const lat = req.body.lat;
   const long = req.body.long;
-  let query = "&query=" + lat + "," + long;
-  console.log(query);
-  let url = endpoints.reverse;
-  url = url + process.env.MAPKEY;
-  url = url + query;
-  console.log(url);
-  const datas = await axios.get(url);
-  console.log(datas.data.addresses);
+  const data = await reverse(lat, long);
+  res.send({ data });
+});
 
-  // const locs = await data.json();
-  res.send({ datas: datas.data.addresses });
+export const Loader = expressAsyncHandler(async (req, res) => {
+  let url = req.query.url;
+  // Use regex to vet URL inside util.js
+  const data = await loader(url);
+  res.send({ data });
+});
+
+export const BatchReverse = expressAsyncHandler(async (req, res) => {
+  let city = req.body.city;
+  const geos = await GetByMunicipal(city);
+  const datas = await BR(geos);
+  res.send({ datas });
 });

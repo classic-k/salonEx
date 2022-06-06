@@ -1,8 +1,9 @@
 import express from "express";
-import { reverse } from "../controller/api/index.js";
+import { Reverse, Loader } from "../controller/api/index.js";
 
 const apiRouter = express.Router();
 
-apiRouter.post("/location", reverse);
+apiRouter.post("/location", Reverse);
+apiRouter.get("/loader", Loader);
 
 export default apiRouter;

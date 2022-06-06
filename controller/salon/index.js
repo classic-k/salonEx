@@ -4,14 +4,15 @@ import Salon from "../../models/salon/salonModel.js";
 export const RegSalon = expressAsyncHandler(async (req, res) => {
   let name = req.body.name;
   let email = req.body.email;
-  let coords = req.body.coords;
+  let lat = req.body.lat;
+  let lon = req.body.lon;
   let phone = req.body.phone;
   let sex = req.body.sex;
   sex = parseInt(sex);
   let owner = req.owner;
   let desc = req.body.desc;
-  let city = coords.city;
-  let pos = [coords.lat, coords.long];
+  let city = req.body.city;
+  let pos = [lat, lon];
   try {
     const salon = new Salon({
       name: name,
@@ -35,3 +36,16 @@ export const RegSalon = expressAsyncHandler(async (req, res) => {
     res.status(500).send({ msg: "An error occur try later" });
   }
 });
+
+export const GetByMunicipal = async (city) => {
+  const salons = await Salon.find({ city: city });
+  // prepare geos base on batch query format
+  const geos = [];
+  if (salons) {
+    for (const salon in salons) {
+      geos.push(salon.pos);
+    }
+  }
+
+  return geos;
+};

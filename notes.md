@@ -9,4 +9,15 @@ Create Owner and populate owner controller
 Create map connection and kick start loading data via Owner reg
 
 Maps:
-Understand how passport write headers and midleware use
+Get user munucipal
+query salon db using municipal
+load query result on map
+let user click or show closest to user
+if no salon in municipal use closest municipal
+
+Challenge How to get closest municipal using geocode
+
+Use cors rule to restrict API access
+
+Set default CSP and other headers
+Map Loading And Dashboard for users and owners

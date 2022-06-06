@@ -7,12 +7,12 @@ import { init_passport } from "./controller/auth/passport-config.js";
 import userRouter from "./routes/userRoute.js";
 import ownerRouter from "./routes/ownerRoute.js";
 import apiRouter from "./routes/apiRoute.js";
-import { MDB } from "./models/connect.js";
+import { SQLite } from "./models/connect.js";
 
 const app = express();
 
 init_passport(passport);
-MDB();
+SQLite();
 
 try {
   app.use(

@@ -2,64 +2,6 @@
   <head>
     <title>Registration Page</title>
   </head>
-  <script>
-    /*
-    function geo_req() {
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(suc, er);
-      }
-    }
-
-    const suc = (cord) => {
-      console.log("Success");
-      console.log(cord);
-      window["lon"].value = cord.coords.longitude;
-      window["lat"].value = cord.coords.latitude;
-    };
-
-    const er = (err) => {
-      console.log("err");
-      console.log(err);
-    };
-*/
-    var api = "http://127.0.0.1:5000/api/";
-    async function geoLocation() {
-      const loc = navigator.geolocation.getCurrentPosition(
-        (coords) => {
-          let coord = coords.coords;
-          const geo = { lat: coord.latitude, long: coord.longitude };
-          const loc = reverse("location", geo);
-          console.log(loc);
-          return loc;
-        },
-        (err) => {
-          console.log(err);
-        }
-      );
-
-      return loc;
-    }
-
-    function reverse(url, data) {
-      url = api + url;
-
-      fetch(url, {
-        method: "post",
-        body: JSON.stringify(data),
-        headers: { "Content-Type": "application/json" },
-      })
-        .then((data) => {
-          return data.json();
-        })
-        .then((data) => {
-          console.log(data);
-          return data;
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }
-  </script>
   <body onload="geoLocation()">
     <div className="container">
       <div className="title_container">
@@ -112,7 +54,12 @@
           <div className="col_half">
             <div className="input_field">
               <span><i aria-hidden="true" className="fa fa-user"></i></span>
-              <input type="text" name="address" placeholder="Location" />
+              <input
+                type="text"
+                name="address"
+                placeholder="Location"
+                class="addr"
+              />
             </div>
           </div>
         </div>
@@ -120,14 +67,25 @@
           <div className="col_half">
             <div className="input_field">
               <span><i aria-hidden="true" className="fa fa-user"></i></span>
-              <input type="text" name="city" placeholder="City" />
+              <input type="text" name="city" placeholder="City" class="cit" />
               <input
                 type="hidden"
                 name="lon"
                 placeholder="Longitude"
-                id="lon"
+                class="lon"
               />
-              <input type="hidden" name="lat" placeholder="Latitude" id="lat" />
+              <input
+                type="hidden"
+                name="lat"
+                class="lat"
+                placeholder="Latitude"
+              />
+              <input
+                type="hidden"
+                name="locName"
+                class="ln"
+                placeholder="Local Name"
+              />
             </div>
           </div>
         </div>
@@ -164,5 +122,7 @@
         <input className="button" type="submit" value="Register" />
       </form>
     </div>
+    <div class="container" id="map"></div>
+    <script src="js/loc.js"></script>
   </body>
 </html>
