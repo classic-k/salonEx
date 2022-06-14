@@ -7,6 +7,7 @@ import { init_passport } from "./controller/auth/passport-config.js";
 import userRouter from "./routes/userRoute.js";
 import ownerRouter from "./routes/ownerRoute.js";
 import apiRouter from "./routes/apiRoute.js";
+import mapRouter from "./routes/mapRoute.js";
 import { SQLite } from "./models/connect.js";
 
 const app = express();
@@ -43,6 +44,7 @@ app.get("/", (req, res) => {
 app.use("/api", apiRouter);
 app.use("/user", userRouter);
 app.use("/owner", ownerRouter);
+app.use("/map", mapRouter);
 app.listen(5000, () => {
   console.log("Loaded");
 });

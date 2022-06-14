@@ -30,3 +30,8 @@ export const Register = expressAsyncHandler(async (req, res, next) => {
   res.status(201).send({ message: "Registration successful" });
   console.log("Registration");
 });
+
+export const Book = expressAsyncHandler(async (req, res, next) => {
+  let salon = req.body.salon;
+  let schedule = req.body.schedule;
+});

@@ -48,7 +48,9 @@ userRouter.post(
     res.redirect(302, "/user/dash");
   }
 );
-
+userRouter.get("/book", (req, res) => {
+  res.render("users/book.ejs");
+});
 userRouter.post("/register", Register);
 
 export default userRouter;

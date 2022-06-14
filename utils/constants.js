@@ -10,4 +10,6 @@ export const endpoints = {
   reverse:
     "https://atlas.microsoft.com/search/address/reverse/json?typeahead=true&api-version=1.0&language=en-US&number=1&entityType=Municipality&subscription-key=",
   batchReverse: "",
+  polygon:
+    "https://atlas.microsoft.com/search/polygon/json?api-version=1.0&subscription-key=",
 };

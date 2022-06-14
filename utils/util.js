@@ -31,7 +31,10 @@ export const chkSession = (req, res, next) => {
 
 export const vetLoader = (url) => {
   // apply regex to vet url then replace key and return false if altered
-  if (url.indexOf(process.env.MAPL) < 0) return false;
-  url.replace(process.env.MAPL, process.env.MAPKEY);
+
+  if (url.indexOf(process.env.MAPL) >= 0) {
+    url = url.replace(process.env.MAPL, process.env.MAPKEY);
+  }
+
   return url;
 };

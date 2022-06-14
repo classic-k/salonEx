@@ -20,4 +20,5 @@ Challenge How to get closest municipal using geocode
 Use cors rule to restrict API access
 
 Set default CSP and other headers
-Map Loading And Dashboard for users and owners
+Map Loading And Dashboard for users and owners Update redis DB When new salon is added
+Booking Form and test map page

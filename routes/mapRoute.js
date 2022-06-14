@@ -1,10 +1,10 @@
-import { url_re } from "../controller/map/auth.js";
+//import { url_re } from "../controller/map/auth.js";
 import express from "express";
 
 const mapRouter = express.Router();
 
-router.get("/", (req, res) => {
-  const token = url_re();
+mapRouter.get("/", (req, res) => {
+  res.render("maps/index.ejs");
 });
 
 export default mapRouter;
