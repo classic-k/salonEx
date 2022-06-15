@@ -8,12 +8,12 @@ import userRouter from "./routes/userRoute.js";
 import ownerRouter from "./routes/ownerRoute.js";
 import apiRouter from "./routes/apiRoute.js";
 import mapRouter from "./routes/mapRoute.js";
-import { SQLite } from "./models/connect.js";
+import { MDB as DB } from "./models/connect.js";
 
 const app = express();
 
 init_passport(passport);
-SQLite();
+DB();
 
 try {
   app.use(

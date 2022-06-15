@@ -2,12 +2,12 @@ import axios from "axios";
 import { endpoints } from "../../utils/constants.js";
 import { vetLoader } from "../../utils/util.js";
 
-export const BatchReverse = async (datas) => {
-  let query = "&query=" + datas;
-  let url = endpoints.batchReverse;
-  url = url + process.env.MAPKEY + query;
-  const res = await axios.get(url);
-  return res;
+export const batchReverse = async (datas) => {
+  // let query = "&query=" + datas;
+  let url = endpoints.postSyncBR;
+  url = url + process.env.MAPKEY; //+ query;
+  const res = await axios({ method: "post", url: url, data: datas });
+  return res.data;
 };
 
 export const reverse = async (lat, long) => {
@@ -36,7 +36,7 @@ export const polygon = (geometry) => {
   url = url + "&geometries=" + geometry;
 
   const res = axios.get(url);
-  return res;
+  return res.data;
   // const data = res.data.additionalData.providerID.geometryData.features;
   // return data;
 };
@@ -72,4 +72,10 @@ export const loader = async (req, url) => {
   });
   // console.log(res);
   return res;
+};
+
+export const getGeo = (datas) => {
+  const addresses = datas.addresses;
+  const geometries = addresses.map((ind, val) => val.dataSources.geometry.id);
+  return geometries.join(",");
 };

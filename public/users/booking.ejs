@@ -1,6 +1,7 @@
 <html>
   <head>
     <title>Booking</title>
+    <link href="/css/book.css" rel="stylesheet" />
   </head>
   <body>
     <div className="container">
@@ -8,97 +9,46 @@
         <h2>Responsive Booking Form</h2>
       </div>
 
+      <div className="row clearfix">
+        <h3>Filters</h3>
+        <div className="input_field radio_option">
+          <input type="radio" name="sex" id="rd1" value="male" />
+          <span>Male</span>
+          <input type="radio" name="sex" id="rd2" value="female" />
+          <span>Female</span>
+          <input type="radio" name="sex" id="rd2" value="female" />
+          <span>Unisex</span>
+        </div>
+        <div>
+          <div id="bm"></div>
+
+          <div id="search">
+            <div class="search-input-box">
+              <div class="search-input-group">
+                <div class="search-icon" type="button"></div>
+                <input id="search-input" type="text" placeholder="Search" />
+              </div>
+            </div>
+            <ul id="results-panel"></ul>
+          </div>
+        </div>
+      </div>
+
       <form method="post" action="/user/book">
         <div className="row clearfix">
           <div className="col_half">
             <div className="input_field">
               <span><i aria-hidden="true" className="fa fa-user"></i></span>
-              <input
-                type="text"
-                name="salon"
-                placeholder="Salon Name"
-                required
-              />
+              <select name="salon">
+                <option value="">Select Salon Name</option>
+              </select>
             </div>
           </div>
         </div>
 
-        <div className="row clearfix">
-          <div className="col_half">
-            <div className="input_field">
-              <span><i aria-hidden="true" className="fa fa-user"></i></span>
-              <input
-                type="text"
-                name="lastname"
-                placeholder="Lastname"
-                required
-              />
-            </div>
-          </div>
-        </div>
-
-        <div className="row clearfix">
-          <div className="col_half">
-            <div className="input_field">
-              <span><i aria-hidden="true" className="fa fa-user"></i></span>
-              <input type="text" name="phone" placeholder="Your Phone" />
-            </div>
-          </div>
-        </div>
-
-        <div className="row clearfix">
-          <div className="col_half">
-            <div className="input_field">
-              <span><i aria-hidden="true" className="fa fa-user"></i></span>
-              <input
-                type="password"
-                name="password"
-                placeholder="Password"
-                required
-              />
-            </div>
-          </div>
-        </div>
-
-        <div className="row clearfix">
-          <div className="col_half">
-            <div className="input_field">
-              <span><i aria-hidden="true" className="fa fa-user"></i></span>
-              <input
-                type="password"
-                name="cpassword"
-                placeholder="Re-type
-              Password"
-                required
-              />
-            </div>
-          </div>
-        </div>
-
-        <div className="row clearfix">
-          <div className="col_half">
-            <div className="input_field">
-              <span><i aria-hidden="true" className="fa fa-user"></i></span>
-              <input type="email" name="email" placeholder="Email Address" />
-            </div>
-          </div>
-        </div>
-
-        <div className="row clearfix">
-          <div className="col_half">
-            <div className="input_field">
-              <span><i aria-hidden="true" className="fa fa-user"></i></span>
-              <div className="input_field radio_option">
-                <input type="radio" name="sex" id="rd1" value="male" />
-                <span>Male</span>
-                <input type="radio" name="sex" id="rd2" value="female" />
-                <span>Female</span>
-              </div>
-            </div>
-          </div>
-        </div>
         <input className="button" type="submit" value="Register" />
       </form>
     </div>
+    <script src="/js/loc.js"></script>
   </body>
 </html>

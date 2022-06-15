@@ -1,5 +1,11 @@
 import expressAsyncHandler from "express-async-handler";
-import { reverse, loader, polygon, BatchReverse as BR } from "../map/index.js";
+import {
+  reverse,
+  loader,
+  polygon,
+  batchReverse as BR,
+  getGeo,
+} from "../map/index.js";
 import { GetByMunicipal } from "../salon/index.js";
 import fs from "fs";
 import { Readable } from "stream";
@@ -17,12 +23,9 @@ export const RS = expressAsyncHandler(async (req, res) => {
 
   const c = pos.trim().split(",");
   const data = await reverse(c[0], c[1]);
-  const ds = data.addresses[0];
-  const geo = ds.dataSources.geometry.id; //+ ",";
-  // console.log(ds.dataSources.geometry);
+  const geo = getGeo(data);
   polygon(geo)
     .then((resp) => {
-      // console.log(res.data.additionalData.geometryData);
       const addD = resp.data.additionalData[0];
       const result = addD.geometryData.features;
       console.log(result);

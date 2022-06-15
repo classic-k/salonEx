@@ -22,3 +22,6 @@ Use cors rule to restrict API access
 Set default CSP and other headers
 Map Loading And Dashboard for users and owners Update redis DB When new salon is added
 Booking Form and test map page
+
+Segment Registration form
+Task At Hand: Load city from DB and use result to populate and bound map.

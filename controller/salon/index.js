@@ -8,11 +8,13 @@ export const RegSalon = expressAsyncHandler(async (req, res) => {
   let lon = req.body.lon;
   let phone = req.body.phone;
   let sex = req.body.sex;
-  sex = parseInt(sex);
-  let owner = req.owner;
+  let address = req.body.address;
+  let owner = req.user.owner;
   let desc = req.body.desc;
   let city = req.body.city;
   let pos = [lat, lon];
+  let ln = req.body.locName;
+  //console.log(owner);
   try {
     const salon = new Salon({
       name: name,
@@ -23,6 +25,8 @@ export const RegSalon = expressAsyncHandler(async (req, res) => {
       sex: sex,
       coordinate: pos,
       city: city,
+      locName: ln,
+      address: address,
     });
     const ns = await salon.save();
     if (ns) {
@@ -43,9 +47,11 @@ export const GetByMunicipal = async (city) => {
   const geos = [];
   if (salons) {
     for (const salon in salons) {
-      geos.push(salon.pos);
+      let pos = salon.coordinate;
+      let query = "?query=" + pos.join(",");
+      geos.push({ query });
     }
   }
 
-  return geos;
+  return { batchItems: geos };
 };

@@ -21,7 +21,7 @@ function createMap() {
     transformRequest: loader,
     authOptions: {
       authType: "subscriptionKey",
-      subscriptionKey: "jKBfaAqvGOa99Tm9n_od4_5pidxDQmZ5OHV_8A7vTgE",
+      subscriptionKey: "4e2e-96f9-a1a439da366f1cNBOj91GihLAImq",
     },
   });
 
