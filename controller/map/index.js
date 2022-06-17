@@ -30,12 +30,13 @@ export const reverse = async (lat, long) => {
   const data = datas.data;
   return data;
 };
-export const polygon = (geometry) => {
+export const polygon = async (geometry) => {
   let url = endpoints.polygon;
   url = url + process.env.MAPKEY;
   url = url + "&geometries=" + geometry;
 
-  const res = axios.get(url);
+  const res = await axios.get(url);
+  ///console.log(res.data);
   return res.data;
   // const data = res.data.additionalData.providerID.geometryData.features;
   // return data;
@@ -76,6 +77,6 @@ export const loader = async (req, url) => {
 
 export const getGeo = (datas) => {
   const addresses = datas.addresses;
-  const geometries = addresses.map((ind, val) => val.dataSources.geometry.id);
+  const geometries = addresses.map((val) => val.dataSources.geometry.id);
   return geometries.join(",");
 };

@@ -30,7 +30,11 @@ export const Register = expressAsyncHandler(async (req, res, next) => {
   res.status(201).send({ message: "Registration successful" });
   console.log("Registration");
 });
-
+export const fetchCity = async (user) => {
+  const users = await User.findById(user);
+  if (users) return users.city;
+  return;
+};
 export const Book = expressAsyncHandler(async (req, res, next) => {
   let salon = req.body.salon;
   let schedule = req.body.schedule;

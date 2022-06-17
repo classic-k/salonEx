@@ -62,10 +62,9 @@ export const Auth_User = (req, res, next) => {
     return next();
   }
   const url = req.baseUrl;
-  if (url.indexOf("user") > 0) {
+  if (url.indexOf("user") >= 0) {
     return res.redirect("/user/login");
-  } else if (url.indexOf("owner") > 0) {
-    console.log("From auth");
+  } else if (url.indexOf("owner") >= 0) {
     return res.redirect("/owner/login");
   } else {
     return res.redirect("/");

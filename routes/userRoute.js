@@ -34,7 +34,7 @@ userRouter.get("/miscel", (req, res) => {
 });
 
 userRouter.get("/dash", Auth_User, (req, res) => {
-  res.send("Welcome to dashborad");
+  res.render("users/dash.ejs");
 });
 
 userRouter.post(
@@ -48,7 +48,7 @@ userRouter.post(
     res.redirect(302, "/user/dash");
   }
 );
-userRouter.get("/book", (req, res) => {
+userRouter.get("/book", Auth_User, (req, res) => {
   res.render("users/book.ejs");
 });
 userRouter.post("/register", Register);

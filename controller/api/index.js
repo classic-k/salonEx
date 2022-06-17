@@ -7,9 +7,7 @@ import {
   getGeo,
 } from "../map/index.js";
 import { GetByMunicipal } from "../salon/index.js";
-import fs from "fs";
-import { Readable } from "stream";
-import buffer, { Buffer } from "buffer";
+import { fetchCity } from "../auth/index.js";
 
 export const Reverse = expressAsyncHandler(async (req, res) => {
   const lat = req.body.lat;
@@ -23,17 +21,15 @@ export const RS = expressAsyncHandler(async (req, res) => {
 
   const c = pos.trim().split(",");
   const data = await reverse(c[0], c[1]);
+  // console.log(data.addresses[0].address);
+  const city = data.addresses[0].address.municipality;
   const geo = getGeo(data);
-  polygon(geo)
-    .then((resp) => {
-      const addD = resp.data.additionalData[0];
-      const result = addD.geometryData.features;
-      console.log(result);
-      res.send({ result });
-    })
-    .catch((err) => {
-      console.log(err.message);
-    });
+  const resp = await polygon(geo);
+  const bbox = data.addresses[0].address.boundingBox;
+  const addD = resp.additionalData[0];
+  const result = addD.geometryData.features;
+  // console.log(result);
+  res.send({ result, city, bbox });
 });
 
 export const Loader = (req, res) => {
@@ -74,8 +70,14 @@ export const Loader = (req, res) => {
 };
 
 export const BatchReverse = expressAsyncHandler(async (req, res) => {
-  let city = req.body.city;
+  const user = req.user.id;
+  const city = fetchCity(user);
   const geos = await GetByMunicipal(city);
+
   const datas = await BR(geos);
   res.send({ datas });
+});
+
+export const BookReverse = expressAsyncHandler(async (req, res) => {
+  const user = req.user.id;
 });
