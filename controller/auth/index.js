@@ -1,5 +1,6 @@
 import expressAsyncHandler from "express-async-handler";
 import User from "../../models/users/userModel.js";
+import Booking from "../../models/books/bookModel.js";
 import { hashStr } from "../../utils/util.js";
 
 export const Register = expressAsyncHandler(async (req, res, next) => {
@@ -36,6 +37,19 @@ export const fetchCity = async (user) => {
   return;
 };
 export const Book = expressAsyncHandler(async (req, res, next) => {
-  let salon = req.body.salon;
-  let schedule = req.body.schedule;
+  const salon = req.body.salon;
+  const type = req.body.type; //
+  const schedule = req.body.schedule;
+  const user = req.user.id;
+  const description = req.body.desc;
+
+  const book = new Booking({
+    salon,
+    user,
+    schedule,
+    description,
+  });
+
+  const details = await book.save();
+  res.send({ details });
 });

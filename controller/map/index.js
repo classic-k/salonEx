@@ -1,6 +1,7 @@
 import axios from "axios";
 import { endpoints } from "../../utils/constants.js";
 import { vetLoader } from "../../utils/util.js";
+import { getSalons } from "../salon/index.js";
 
 export const batchReverse = async (datas) => {
   // let query = "&query=" + datas;
@@ -79,4 +80,9 @@ export const getGeo = (datas) => {
   const addresses = datas.addresses;
   const geometries = addresses.map((val) => val.dataSources.geometry.id);
   return geometries.join(",");
+};
+
+export const getFeatures = async (city) => {
+  const salons = await getSalons(city);
+  return salons;
 };

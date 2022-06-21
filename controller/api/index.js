@@ -5,6 +5,7 @@ import {
   polygon,
   batchReverse as BR,
   getGeo,
+  getFeatures,
 } from "../map/index.js";
 import { GetByMunicipal } from "../salon/index.js";
 import { fetchCity } from "../auth/index.js";
@@ -80,4 +81,18 @@ export const BatchReverse = expressAsyncHandler(async (req, res) => {
 
 export const BookReverse = expressAsyncHandler(async (req, res) => {
   const user = req.user.id;
+});
+
+export const Features = expressAsyncHandler(async (req, res) => {
+  const pos = req.query.pos;
+
+  const c = pos.trim().split(",");
+  const data = await reverse(c[0], c[1]);
+
+  const city = data.addresses[0].address.municipality;
+
+  const salons = await getFeatures(city);
+
+  res.send({ salons: salons, city });
+  //NB Filter salons to exclude IDs
 });

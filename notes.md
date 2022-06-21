@@ -25,3 +25,5 @@ Booking Form and test map page
 
 Segment Registration form
 Task At Hand: Load city from DB and use result to populate and bound map.
+
+Coordinate research

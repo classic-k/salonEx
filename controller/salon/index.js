@@ -55,3 +55,13 @@ export const GetByMunicipal = async (city) => {
 
   return { batchItems: geos };
 };
+
+export const getSalons = async (city) => {
+  const salons = await Salon.find({ city: city });
+  return salons;
+};
+
+export const sexFilter = (sex) => {
+    const salons = await Salon.find({ sex: sex });
+    return salons;
+};

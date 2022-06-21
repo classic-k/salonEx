@@ -1,6 +1,6 @@
 import express from "express";
 import passport from "passport";
-import { Register } from "../controller/auth/index.js";
+import { Register, Book } from "../controller/auth/index.js";
 import { Auth_User } from "../controller/auth/passport-config.js";
 import { query } from "express";
 
@@ -51,6 +51,8 @@ userRouter.post(
 userRouter.get("/book", Auth_User, (req, res) => {
   res.render("users/book.ejs");
 });
+
+userRouter.post("/book", Auth_User, Book);
 userRouter.post("/register", Register);
 
 export default userRouter;

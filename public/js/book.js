@@ -2,7 +2,9 @@ var apiLoad = "http://127.0.0.1:5000/api/loader?url=";
 var ds, layers, data, map, ugeo, city;
 var avail = false;
 var rsq =
-  "http://127.0.0.1:5000/api/loader/search?subKey=4e2e-96f9-a1a439da366f1cNBOj91GihLAImq&pos=";
+  "http://127.0.0.1:5000/api/salons/location?subKey=4e2e-96f9-a1a439da366f1cNBOj91GihLAImq&pos=";
+//"http://127.0.0.1:5000/api/loader/search?subKey=4e2e-96f9-a1a439da366f1cNBOj91GihLAImq&pos=";
+
 var center = [6.7, 3.4];
 function loader(url, type) {
   if (url.indexOf("subscription-key") < 0) {
@@ -17,9 +19,11 @@ function createMap() {
   map = new atlas.Map("bm", {
     view: "Auto",
     zoom: 14,
-    center: [6.605874, 3.349149],
-    language: "en-US",
+    center: [-118.270293, 34.039737],
     transformRequest: loader,
+
+    language: "en-US",
+
     authOptions: {
       authType: "subscriptionKey",
       subscriptionKey: "4e2e-96f9-a1a439da366f1cNBOj91GihLAImq",
@@ -71,13 +75,19 @@ function reverseGeo(pos) {
       //  console.log(dataS);
       //  data = dataS.toJson();
       //  console.log(res);
-      ds.clear();
-      ds.add(res.result);
+      // ds.clear();
+
+      const features = res.salons.map((val) =>
+        mkDS(val.coordinate, { name: val.name, address: val.address })
+      );
+      // console.log(features);
+      ds.setShapes(features);
       city = res.city;
 
-      console.log(res.result.bbox);
+      // console.log(features.bbox);
+
       map.setCamera({
-        bounds: res.result.bbox,
+        bounds: features.bbox,
       });
 
       // console.log(res);
@@ -89,6 +99,10 @@ function reverseGeo(pos) {
 }
 function dataSource() {
   return new atlas.source.DataSource();
+}
+
+function mkDS(pos, cus) {
+  return new atlas.data.Feature(new atlas.data.Point(pos), cus);
 }
 function getLayer(ds) {
   const resultLayer = new atlas.layer.SymbolLayer(ds, null, {

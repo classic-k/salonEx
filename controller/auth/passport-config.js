@@ -48,7 +48,7 @@ export const init_passport = (passport) => {
           owner: user.owner,
         });
       }
-      return cb(null, { id: user.id, username: user.email });
+      return cb(null, { id: user.id, username: user.email, gender: user.sex });
     });
   });
 
