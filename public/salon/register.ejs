@@ -2,10 +2,11 @@
   <head>
     <title>Registration Page</title>
   </head>
-  <body onload="geoLocation()">
+  <body>
     <div className="container">
       <div className="title_container">
         <h2>Salon Registration Form</h2>
+        <button onclick="geoLocation()">Allow Location</button>
       </div>
 
       <form method="post" action="/owner/addsalon">
@@ -67,7 +68,14 @@
           <div className="col_half">
             <div className="input_field">
               <span><i aria-hidden="true" className="fa fa-user"></i></span>
+
               <input type="text" name="city" placeholder="City" class="cit" />
+              <input
+                type="text"
+                name="coordinate"
+                placeholder="Geo codes"
+                class="geo"
+              />
               <input
                 type="hidden"
                 name="lon"

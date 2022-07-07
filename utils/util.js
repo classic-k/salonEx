@@ -1,5 +1,6 @@
 import crypto, { randomBytes } from "crypto";
 import bcrypt from "bcryptjs";
+//import atlas, { math } from "azure-maps-control";
 
 export const encryptPassword = (password, salt) => {
   if (salt) salt = new Buffer(salt);
@@ -37,4 +38,10 @@ export const vetLoader = (url) => {
   }
 
   return url;
+};
+
+export const transformRes = (res) => {
+  const data = res.data;
+  const summary = data.summary;
+  console.log(summary);
 };

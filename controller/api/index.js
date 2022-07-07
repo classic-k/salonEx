@@ -5,9 +5,10 @@ import {
   polygon,
   batchReverse as BR,
   getGeo,
-  getFeatures,
+  address,
+  directionB,
 } from "../map/index.js";
-import { GetByMunicipal } from "../salon/index.js";
+import { getByMunicipal } from "../salon/index.js";
 import { fetchCity } from "../auth/index.js";
 
 export const Reverse = expressAsyncHandler(async (req, res) => {
@@ -24,6 +25,7 @@ export const RS = expressAsyncHandler(async (req, res) => {
   const data = await reverse(c[0], c[1]);
   // console.log(data.addresses[0].address);
   const city = data.addresses[0].address.municipality;
+
   const geo = getGeo(data);
   const resp = await polygon(geo);
   const bbox = data.addresses[0].address.boundingBox;
@@ -78,21 +80,47 @@ export const BatchReverse = expressAsyncHandler(async (req, res) => {
   const datas = await BR(geos);
   res.send({ datas });
 });
+export const SalonFetch = expressAsyncHandler(async (req, res) => {
+  var pos = req.query.pos;
+  pos = pos.trim().split(",");
+  const datas = await reverse(pos[0], pos[1]);
 
+  const city = datas.municipality;
+
+  const salons = await getByMunicipal(city);
+  // console.log(salons);
+  //const sortedSalons = sortDistance(pos, salons);
+  //const features = makeFeatures(sortedSalons);
+  res.send({ salons: salons });
+});
 export const BookReverse = expressAsyncHandler(async (req, res) => {
   const user = req.user.id;
 });
 
-export const Features = expressAsyncHandler(async (req, res) => {
-  const pos = req.query.pos;
+export const Address = expressAsyncHandler(async (req, res) => {
+  let addr = req.query.add;
 
-  const c = pos.trim().split(",");
-  const data = await reverse(c[0], c[1]);
-
-  const city = data.addresses[0].address.municipality;
-
-  const salons = await getFeatures(city);
-
-  res.send({ salons: salons, city });
+  addr = addr.trim();
+  const resp = await address(addr);
+  const center = resp.summary.geoBias;
+  res.send({ center });
   //NB Filter salons to exclude IDs
 });
+
+export const DirectionBR = expressAsyncHandler(async (req, res) => {
+  try {
+    let origin = req.body.origin;
+    let datasets = req.body.datasets;
+
+    const result = await directionB(origin, datasets);
+
+    res.send({ result });
+  } catch (error) {
+    console.log(error.message);
+    res.send({ msg: "An error occur try again" });
+  }
+
+  //NB Filter salons to exclude IDs
+});
+
+export const GetClose = () => {};

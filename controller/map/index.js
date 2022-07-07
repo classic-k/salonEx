@@ -1,7 +1,6 @@
 import axios from "axios";
 import { endpoints } from "../../utils/constants.js";
 import { vetLoader } from "../../utils/util.js";
-import { getSalons } from "../salon/index.js";
 
 export const batchReverse = async (datas) => {
   // let query = "&query=" + datas;
@@ -10,9 +9,15 @@ export const batchReverse = async (datas) => {
   const res = await axios({ method: "post", url: url, data: datas });
   return res.data;
 };
-
+export const address = async (addr) => {
+  let url = endpoints.address;
+  url = url + process.env.MAPKEY; //+ query;
+  url = url + "&query=" + addr;
+  const res = await axios({ method: "get", url: url });
+  return res.data;
+};
 export const reverse = async (lat, long) => {
-  let query = "&query=" + lat + "," + long;
+  let query = "&query=" + long + "," + lat;
   let url = endpoints.reverse;
   url = url + process.env.MAPKEY;
   url = url + query;
@@ -28,9 +33,38 @@ export const reverse = async (lat, long) => {
   };
 */
   // console.log(datas.data.geojson.getFeatures());
-  const data = datas.data;
-  return data;
+  const data = datas.data.addresses[0];
+  return data.address;
 };
+
+export const direction = async (coordinate) => {
+  query = coordinate[0].join("") + ":" + coordinate[1].join("");
+  let url = endpoints.routeDR + process.end.MAPKEY;
+  url = url + "&query=" + query;
+  const data = await axios.get(url);
+  const res = data.data;
+  return res;
+};
+
+export const directionB = async (origin, datasets) => {
+  const result = [];
+  for (var i = 0; i < datasets.length; i++) {
+    var src = datasets[i].geometry.coordinates;
+    var query = origin[1] + "," + origin[0] + ":" + src[1] + "," + src[0];
+    //query = encodeURI(query)
+
+    let url = endpoints.routeDR + process.env.MAPKEY;
+    url = url + "&query=" + query.trim();
+    url = encodeURI(url);
+    // console.log(url);
+    const data = await axios.get(url);
+
+    result.push(data.data);
+  }
+
+  return result;
+};
+
 export const polygon = async (geometry) => {
   let url = endpoints.polygon;
   url = url + process.env.MAPKEY;
@@ -82,7 +116,17 @@ export const getGeo = (datas) => {
   return geometries.join(",");
 };
 
-export const getFeatures = async (city) => {
-  const salons = await getSalons(city);
-  return salons;
+export const makeFeatures = (salons) => {
+  const features = [];
+  salons.forEach((salon) => {
+    const props = Object.keys(salon).filter((val) => val != "coordinate");
+    const cus = {};
+    props.forEach((val) => {
+      cus[val] = salon.val;
+    });
+    features.push(
+      new atlas.features(new atlas.data.pos(salon["coordinate"], cus))
+    );
+  });
+  return features;
 };

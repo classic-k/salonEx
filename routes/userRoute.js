@@ -18,7 +18,9 @@ userRouter.get("/login", (req, res) => {
 
 userRouter.get("/logout", (req, res) => {
   if (req.logOut || req.user) {
-    req.logOut();
+    req.logOut((err) => {
+      if (err) next(err);
+    });
     return res.redirect("/", { msg: msg });
   }
   return res.redirect("/");

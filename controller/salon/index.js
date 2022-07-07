@@ -1,6 +1,9 @@
+//import atlas, { data } from "azure-maps-control";
 import expressAsyncHandler from "express-async-handler";
 import Salon from "../../models/salon/salonModel.js";
+import Schedule from "../../models/salon/scheduleModule.js";
 
+const headers = "name phone coordinates address description sex city";
 export const RegSalon = expressAsyncHandler(async (req, res) => {
   let name = req.body.name;
   let email = req.body.email;
@@ -12,7 +15,14 @@ export const RegSalon = expressAsyncHandler(async (req, res) => {
   let owner = req.user.owner;
   let desc = req.body.desc;
   let city = req.body.city;
-  let pos = [lat, lon];
+  let pos;
+
+  if (lat && lon) {
+    pos = [lon, lat];
+  } else if (req.body.coordinate) {
+    pos = req.body.coordinate;
+    pos = pos.trim().split(",");
+  }
   let ln = req.body.locName;
   //console.log(owner);
   try {
@@ -41,9 +51,17 @@ export const RegSalon = expressAsyncHandler(async (req, res) => {
   }
 });
 
-export const GetByMunicipal = async (city) => {
-  const salons = await Salon.find({ city: city });
+//export const Salons = expressAsyncHandler(async (req, res, next) => {});
+
+export const getByMunicipal = async (city) => {
+  const salons = await Salon.find({ city: city }, headers);
+  // console.log(salons);
+  const datas = extractData(salons);
+  return datas;
+
   // prepare geos base on batch query format
+
+  /*
   const geos = [];
   if (salons) {
     for (const salon in salons) {
@@ -53,15 +71,75 @@ export const GetByMunicipal = async (city) => {
     }
   }
 
-  return { batchItems: geos };
+  return { batchItems: geos }; */
 };
 
-export const getSalons = async (city) => {
-  const salons = await Salon.find({ city: city });
+export const getByOwner = async (req, res, next) => {
+  const owner = req.user.owner;
+  if (!owner) {
+    next("error");
+    return;
+  }
+  const salons = await Salon.find({ owner: owner });
+  req.salons = salons;
+  next();
+};
+
+export const sexFilter = (sex, salon) => {
+  const salons = salon.filter((val) => val.sex === sex || val.sex == 0);
   return salons;
 };
 
-export const sexFilter = (sex) => {
-    const salons = await Salon.find({ sex: sex });
-    return salons;
+export const extractData = (salons) => {
+  const datas = salons.map((val) => {
+    return {
+      name: val.name,
+      address: val.address,
+      phone: val.phone,
+      coordinate: [
+        parseFloat(val.coordinate[1]),
+        parseFloat(val.coordinate[0]),
+      ],
+      sex: val.sex,
+      city: val.city,
+      id: val.id,
+      schedules: fetchSch(val.id),
+    };
+  });
+
+  // console.log(datas);
+  return datas;
+};
+export const fetchSch = async (salon) => {
+  const schedules = await Schedule.find({ salon: salon });
+
+  return schExtract(schedules);
+};
+export const fetchByLoc = async (loc) => {
+  // regex
+  const res = await Salon.find(
+    {
+      $or: [
+        { city: { $regex: loc } },
+        { locName: { $regex: loc } },
+        { address: { $regex: loc } },
+      ],
+    },
+    headers
+  );
+
+  return res;
+};
+
+export const fetchBySexLoc = async (sex, loc) => {
+  const res = await fetchByLoc(loc);
+  const salons = sexFilter(sex, res);
+  return salons;
+};
+export const schExtract = (schedules) => {
+  const datas = schedules.map((val) => {
+    let day = val.day;
+    return { day: [val.opening, val.closing] };
+  });
+  return datas;
 };

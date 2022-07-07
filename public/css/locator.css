@@ -45,7 +45,7 @@ header img {
   height: calc(100vh - 135px);
   overflow-y: auto;
 }
-#bm {
+#mp {
   position: absolute;
   top: 65px;
   left: 350px;
@@ -55,8 +55,7 @@ header img {
 .statusMessage {
   margin: 10px;
 }
-#myLocationBtn,
-#searchBtn {
+.btn {
   margin: 0;
   padding: 0;
   border: none;
@@ -78,7 +77,13 @@ header img {
   box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.16);
   background-color: red;
 }
-
+#routeBtn {
+  position: absolute;
+  top: 300px;
+  right: 10px;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.16);
+  background-color: blue;
+}
 .listItem {
   height: 50px;
   padding: 20px;
@@ -128,7 +133,7 @@ header img {
     width: 100%;
     height: calc(100vh - 385px);
   }
-  #bm {
+  #mp {
     width: 100vw;
     height: 250px;
     top: 135px;

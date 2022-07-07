@@ -17,9 +17,9 @@
 
     <!-- Add a reference to the Azure Maps Services Module JavaScript file. -->
     <script src="https://atlas.microsoft.com/sdk/javascript/service/2/atlas-service.min.js"></script>
-    <link href="/css/book.css" rel="stylesheet" />
+    <link href="/css/locator.css" rel="stylesheet" />
   </head>
-  <body onload="createMap()">
+  <body onload="initialise()">
     <header>
       <h2>Responsive Booking Form</h2>
     </header>
@@ -27,15 +27,17 @@
       <div class="searchPanel">
         <div>
           <input id="searchTbx" type="search" placeholder="Find a store" />
-          <button id="searchBtn" title="Search"></button>
+          <button id="searchBtn" class="btn" title="Search"></button>
         </div>
       </div>
       <div id="listPanel"></div>
 
-      <div id="bm"></div>
+      <div id="mp"></div>
       <button id="myLocationBtn" class="btn" onclick="geoLocation()">
-        Allow Location
+        Location
       </button>
+      <button id="routeBtn" class="btn" onclick="route()">Routes</button>
+
       <!--
 <section>
         <form method="post" action="/user/book">
@@ -55,6 +57,6 @@
       </section>
       -->
     </main>
-    <script src="/js/book.js"></script>
+    <script src="/js/locator.js"></script>
   </body>
 </html>

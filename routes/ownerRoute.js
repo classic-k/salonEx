@@ -35,7 +35,9 @@ ownerRouter.post(
 );
 ownerRouter.get("/logout", (req, res, next) => {
   if (req.isAuthenticated() || req.logOut) {
-    req.logOut();
+    req.logOut((err) => {
+      if (err) next(err);
+    });
   }
   res.redirect("/");
 });

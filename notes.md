@@ -25,5 +25,8 @@ Booking Form and test map page
 
 Segment Registration form
 Task At Hand: Load city from DB and use result to populate and bound map.
+Popup and search box design
+search algo: use location to fetch from db using or for add,city,locname
+include filter option in frontend for sex,
 
-Coordinate research
+Current: Define api route for salon address db search and sex filter integrate with frontend and test

@@ -106,3 +106,23 @@ function POI(ss, lat, lon) {
 function mapRoute() {
   return "ROUTING";
 }
+
+function postFetch(url, data, cb) {
+  fetch(url, {
+    method: "post",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data),
+  })
+    .then((res) => res.json())
+    .then(cb)
+    .catch(console);
+}
+
+function getFetch(url, cb) {
+  fetch(url, { method: "get", headers: { "Content-Type": "text/html" } })
+    .then((res) => {
+      return res.json();
+    })
+    .then(cb)
+    .catch(console);
+}

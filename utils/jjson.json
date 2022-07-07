@@ -1,0 +1,463 @@
+{
+  "proxy": {
+    "intercept_client_requests": {
+      "automatically_fix_missing_or_superfluous_new_lines_at_end_of_request": false,
+      "automatically_update_content_length_header_when_the_request_is_edited": true,
+      "do_intercept": true,
+      "rules": [
+        {
+          "boolean_operator": "and",
+          "enabled": true,
+          "match_condition": "(^gif$|^jpg$|^png$|^css$|^js$|^ico$|^svg$|^eot$|^woff$|^woff2$|^ttf$)",
+          "match_relationship": "does_not_match",
+          "match_type": "file_extension"
+        },
+        {
+          "boolean_operator": "or",
+          "enabled": false,
+          "match_relationship": "contains_parameters",
+          "match_type": "request"
+        },
+        {
+          "boolean_operator": "or",
+          "enabled": false,
+          "match_condition": "(get|post|put)",
+          "match_relationship": "does_not_match",
+          "match_type": "http_method"
+        },
+        {
+          "boolean_operator": "and",
+          "enabled": false,
+          "match_relationship": "is_in_target_scope",
+          "match_type": "url"
+        },
+
+        {
+          "boolean_operator": "and",
+          "enabled": true,
+          "match_condition": "^activity\\.windows\\.com$",
+          "match_relationship": "does_not_match",
+          "match_type": "domain_name"
+        },
+        {
+          "boolean_operator": "and",
+          "enabled": true,
+          "match_condition": "^www\\.google\\.com$",
+          "match_relationship": "does_not_match",
+          "match_type": "domain_name"
+        },
+        {
+          "boolean_operator": "and",
+          "enabled": true,
+          "match_condition": "^www\\.googleapis\\.com$",
+          "match_relationship": "does_not_match",
+          "match_type": "domain_name"
+        },
+        {
+          "boolean_operator": "and",
+          "enabled": true,
+          "match_condition": "^safebrowsing\\.google\\.com$",
+          "match_relationship": "does_not_match",
+          "match_type": "domain_name"
+        },
+        {
+          "boolean_operator": "and",
+          "enabled": true,
+          "match_condition": "^safebrowsing\\.google\\.com$",
+          "match_relationship": "does_not_match",
+          "match_type": "domain_name"
+        },
+        {
+          "boolean_operator": "and",
+          "enabled": true,
+          "match_condition": "^beacons\\.gcp\\.gvt2\\.com$",
+          "match_relationship": "does_not_match",
+          "match_type": "domain_name"
+        },
+        {
+          "boolean_operator": "and",
+          "enabled": true,
+          "match_condition": "^app\\.link$",
+          "match_relationship": "does_not_match",
+          "match_type": "domain_name"
+        },
+
+        {
+          "boolean_operator": "and",
+          "enabled": true,
+          "match_condition": "^clientsd\\.google\\.com$",
+          "match_relationship": "does_not_match",
+          "match_type": "domain_name"
+        },
+
+        {
+          "boolean_operator": "and",
+          "enabled": true,
+          "match_condition": "^app\\.link$",
+          "match_relationship": "does_not_match",
+          "match_type": "domain_name"
+        },
+        {
+          "boolean_operator": "and",
+          "enabled": true,
+          "match_condition": "^www\\.gstatic\\.com$",
+          "match_relationship": "does_not_match",
+          "match_type": "domain_name"
+        },
+        {
+          "boolean_operator": "and",
+          "enabled": true,
+          "match_condition": "^www\\.google-analytics\\.com$",
+          "match_relationship": "does_not_match",
+          "match_type": "domain_name"
+        },
+        {
+          "boolean_operator": "and",
+          "enabled": true,
+          "match_condition": "^az764295\\.vo\\.msecnd\\.net$",
+          "match_relationship": "does_not_match",
+          "match_type": "domain_name"
+        },
+        {
+          "boolean_operator": "and",
+          "enabled": true,
+          "match_condition": "^clientservices\\.googleapis\\.com$",
+          "match_relationship": "does_not_match",
+          "match_type": "domain_name"
+        },
+        {
+          "boolean_operator": "and",
+          "enabled": true,
+          "match_condition": "^login\\.live\\.com$",
+          "match_relationship": "does_not_match",
+          "match_type": "domain_name"
+        },
+        {
+          "boolean_operator": "and",
+          "enabled": true,
+          "match_condition": "^analytics\\.google\\.com$",
+          "match_relationship": "does_not_match",
+          "match_type": "domain_name"
+        },
+        {
+          "boolean_operator": "and",
+          "enabled": true,
+          "match_condition": "^www\\.facebook\\.com$",
+          "match_relationship": "does_not_match",
+          "match_type": "domain_name"
+        },
+        {
+          "boolean_operator": "and",
+          "enabled": true,
+          "match_condition": "^content-autofill\\.googleapis\\.com$",
+          "match_relationship": "does_not_match",
+          "match_type": "domain_name"
+        },
+        {
+          "boolean_operator": "and",
+          "enabled": true,
+          "match_condition": "^tsfe\\.trafficshaping\\.dsp\\.mp\\.microsoft\\.com$",
+          "match_relationship": "does_not_match",
+          "match_type": "domain_name"
+        },
+        {
+          "boolean_operator": "and",
+          "enabled": true,
+          "match_condition": "^redirector\\.gvt1\\.com$",
+          "match_relationship": "does_not_match",
+          "match_type": "domain_name"
+        },
+        {
+          "boolean_operator": "and",
+          "enabled": true,
+          "match_condition": "^x1\\.c\\.lencr\\.org$",
+          "match_relationship": "does_not_match",
+          "match_type": "domain_name"
+        },
+        {
+          "boolean_operator": "and",
+          "enabled": true,
+          "match_condition": "^optimizationguide-pa\\.googleapis\\.com$",
+          "match_relationship": "does_not_match",
+          "match_type": "domain_name"
+        },
+        {
+          "boolean_operator": "and",
+          "enabled": true,
+          "match_condition": "^crl\\.comodoca\\.com$",
+          "match_relationship": "does_not_match",
+          "match_type": "domain_name"
+        },
+        {
+          "boolean_operator": "and",
+          "enabled": true,
+          "match_condition": "^ctldl\\.windowsupdate\\.com$",
+          "match_relationship": "does_not_match",
+          "match_type": "domain_name"
+        },
+        {
+          "boolean_operator": "and",
+          "enabled": true,
+          "match_condition": "^ctldl\\.windowsupdate\\.com$",
+          "match_relationship": "does_not_match",
+          "match_type": "domain_name"
+        },
+
+        {
+          "boolean_operator": "and",
+          "enabled": true,
+          "match_condition": "^ctldl\\.windowsupdate\\.com$",
+          "match_relationship": "does_not_match",
+          "match_type": "domain_name"
+        },
+        {
+          "boolean_operator": "and",
+          "enabled": true,
+          "match_condition": "^prod\\.rewardsplatform\\.microsoft\\.com$",
+          "match_relationship": "does_not_match",
+          "match_type": "domain_name"
+        },
+        {
+          "boolean_operator": "and",
+          "enabled": true,
+          "match_condition": "^ctldl\\.windowsupdate\\.com$",
+          "match_relationship": "does_not_match",
+          "match_type": "domain_name"
+        },
+
+        {
+          "boolean_operator": "and",
+          "enabled": true,
+          "match_condition": "^slscr\\.update\\.microsoft\\.com$",
+          "match_relationship": "does_not_match",
+          "match_type": "domain_name"
+        },
+        {
+          "boolean_operator": "and",
+          "enabled": true,
+          "match_condition": "^geo\\.prod\\.do\\.dsp\\.mp\\.microsoft\\.com$",
+          "match_relationship": "does_not_match",
+          "match_type": "domain_name"
+        },
+        {
+          "boolean_operator": "and",
+          "enabled": true,
+          "match_condition": "^kv801\\.prod\\.do\\.dsp\\.mp\\.microsoft\\.com$",
+          "match_relationship": "does_not_match",
+          "match_type": "domain_name"
+        },
+        {
+          "boolean_operator": "and",
+          "enabled": true,
+          "match_condition": "^safebrowsing\\.googleapis\\.com$",
+          "match_relationship": "does_not_match",
+          "match_type": "domain_name"
+        },
+
+        {
+          "boolean_operator": "and",
+          "enabled": true,
+          "match_condition": "^update\\.code\\.visualstudio\\.com$",
+          "match_relationship": "does_not_match",
+          "match_type": "domain_name"
+        },
+        {
+          "boolean_operator": "and",
+          "enabled": true,
+          "match_condition": "^https://update.code.visualstudio.com/api/update/win32-x64/stable/.*",
+          "match_relationship": "does_not_match",
+          "match_type": "url"
+        },
+        {
+          "boolean_operator": "and",
+          "enabled": true,
+          "match_condition": "^default\\.exp-tas\\.com$",
+          "match_relationship": "does_not_match",
+          "match_type": "domain_name"
+        },
+        {
+          "boolean_operator": "and",
+          "enabled": true,
+          "match_condition": "^https://default.exp-tas.com/vscode/.*",
+          "match_relationship": "does_not_match",
+          "match_type": "url"
+        },
+        {
+          "boolean_operator": "and",
+          "enabled": true,
+          "match_condition": "^default\\.exp-tas\\.com$",
+          "match_relationship": "does_not_match",
+          "match_type": "domain_name"
+        },
+        {
+          "boolean_operator": "and",
+          "enabled": true,
+          "match_condition": "^marketplace\\.visualstudio\\.com$",
+          "match_relationship": "does_not_match",
+          "match_type": "domain_name"
+        },
+        {
+          "boolean_operator": "and",
+          "enabled": true,
+          "match_condition": "^https://marketplace.visualstudio.com/_apis/public/gallery/.*",
+          "match_relationship": "does_not_match",
+          "match_type": "url"
+        },
+        {
+          "boolean_operator": "and",
+          "enabled": true,
+          "match_condition": "^vscodeexperiments\\.azureedge\\.net$",
+          "match_relationship": "does_not_match",
+          "match_type": "domain_name"
+        },
+        {
+          "boolean_operator": "and",
+          "enabled": true,
+          "match_condition": "^https://vscodeexperiments.azureedge.net/experiments/.*",
+          "match_relationship": "does_not_match",
+          "match_type": "url"
+        },
+        {
+          "boolean_operator": "and",
+          "enabled": true,
+          "match_condition": "^dc\\.services\\.visualstudio\\.com$",
+          "match_relationship": "does_not_match",
+          "match_type": "domain_name"
+        },
+        {
+          "boolean_operator": "and",
+          "enabled": true,
+          "match_condition": "^vortex\\.data\\.microsoft\\.com$",
+          "match_relationship": "does_not_match",
+          "match_type": "domain_name"
+        },
+        {
+          "boolean_operator": "and",
+          "enabled": true,
+          "match_condition": "^msedge\\.api\\.cdp\\.microsoft\\.com$",
+          "match_relationship": "does_not_match",
+          "match_type": "domain_name"
+        },
+        {
+          "boolean_operator": "and",
+          "enabled": true,
+          "match_condition": "^https://msedge.api.cdp.microsoft.com/api/v1.1/contents/Browser/namespaces/Default/names/msedgeupdate-stable-win-x86/versions/.*",
+          "match_relationship": "does_not_match",
+          "match_type": "url"
+        },
+        {
+          "boolean_operator": "and",
+          "enabled": true,
+          "match_condition": "^config\\.edge\\.skype\\.com$",
+          "match_relationship": "does_not_match",
+          "match_type": "domain_name"
+        },
+        {
+          "boolean_operator": "and",
+          "enabled": true,
+          "match_condition": "^https://config.edge.skype.com/config/v1/EdgeUpdate/.*",
+          "match_relationship": "does_not_match",
+          "match_type": "url"
+        },
+        {
+          "boolean_operator": "and",
+          "enabled": true,
+          "match_condition": "^nav\\.smartscreen\\.microsoft\\.com$",
+          "match_relationship": "does_not_match",
+          "match_type": "domain_name"
+        },
+        {
+          "boolean_operator": "and",
+          "enabled": true,
+          "match_condition": "^https://nav.smartscreen.microsoft.com/api/browser/edge/.*",
+          "match_relationship": "does_not_match",
+          "match_type": "url"
+        },
+        {
+          "boolean_operator": "and",
+          "enabled": true,
+          "match_condition": "^nav\\.smartscreen\\.microsoft\\.com$",
+          "match_relationship": "does_not_match",
+          "match_type": "domain_name"
+        },
+        {
+          "boolean_operator": "and",
+          "enabled": true,
+          "match_condition": "^https://nav.smartscreen.microsoft.com/api/browser/edge/navigate/.*",
+          "match_relationship": "does_not_match",
+          "match_type": "url"
+        },
+        {
+          "boolean_operator": "and",
+          "enabled": true,
+          "match_condition": "^edge\\.microsoft\\.com$",
+          "match_relationship": "does_not_match",
+          "match_type": "domain_name"
+        },
+        {
+          "boolean_operator": "and",
+          "enabled": true,
+          "match_condition": "^https://edge.microsoft.com/abusiveadblocking/api/v1/.*",
+          "match_relationship": "does_not_match",
+          "match_type": "url"
+        },
+        {
+          "boolean_operator": "and",
+          "enabled": true,
+          "match_condition": "^update\\.googleapis\\.com$",
+          "match_relationship": "does_not_match",
+          "match_type": "domain_name"
+        },
+        {
+          "boolean_operator": "and",
+          "enabled": true,
+          "match_condition": "^https://update.googleapis.com/service/.*",
+          "match_relationship": "does_not_match",
+          "match_type": "url"
+        },
+        {
+          "boolean_operator": "and",
+          "enabled": true,
+          "match_condition": "^edge\\.microsoft\\.com$",
+          "match_relationship": "does_not_match",
+          "match_type": "domain_name"
+        },
+        {
+          "boolean_operator": "and",
+          "enabled": true,
+          "match_condition": "^https://edge.microsoft.com/identity/api/v3/.*",
+          "match_relationship": "does_not_match",
+          "match_type": "url"
+        },
+        {
+          "boolean_operator": "and",
+          "enabled": true,
+          "match_condition": "^ntp\\.msn\\.com$",
+          "match_relationship": "does_not_match",
+          "match_type": "domain_name"
+        },
+        {
+          "boolean_operator": "and",
+          "enabled": true,
+          "match_condition": "^https://ntp.msn.com/edge/.*",
+          "match_relationship": "does_not_match",
+          "match_type": "url"
+        },
+        {
+          "boolean_operator": "and",
+          "enabled": true,
+          "match_condition": "^cdn\\.jsdelivr\\.net$",
+          "match_relationship": "does_not_match",
+          "match_type": "domain_name"
+        },
+        {
+          "boolean_operator": "and",
+          "enabled": true,
+          "match_condition": "^https://cdn.jsdelivr.net/gh/MetaMask/eth-phishing-detect@master/src/.*",
+          "match_relationship": "does_not_match",
+          "match_type": "url"
+        }
+      ]
+    }
+  }
+}

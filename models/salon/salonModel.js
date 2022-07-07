@@ -13,6 +13,7 @@ const salons = new mongoose.Schema(
     phone: { type: String, required: true },
     description: { type: String, required: true },
     sex: { type: String, required: true },
+    notes: { type: String, required: false }, //Schedule note e.g no opening on public holidays etc
     admin: {
       type: mongoose.Schema.Types.ObjectId,
       ref: Owner,
