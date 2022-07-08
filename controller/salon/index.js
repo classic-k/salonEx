@@ -132,9 +132,11 @@ export const fetchByLoc = async (loc) => {
 };
 
 export const fetchBySexLoc = async (sex, loc) => {
-  const res = await fetchByLoc(loc);
-  const salons = sexFilter(sex, res);
-  return salons;
+  var res = await fetchByLoc(loc);
+  if (sex) {
+    res = sexFilter(sex, res);
+  }
+  return res;
 };
 export const schExtract = (schedules) => {
   const datas = schedules.map((val) => {

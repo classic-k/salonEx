@@ -6,6 +6,7 @@ import {
   BatchReverse,
   SalonFetch,
   DirectionBR,
+  SalonFetchFil,
 } from "../controller/api/index.js";
 
 const apiRouter = express.Router();
@@ -17,6 +18,7 @@ apiRouter.post("/routeB/calculate", DirectionBR);
 //apiRouter.get("salon/location", BatchReverse);
 apiRouter.get("salon/location", BatchReverse);
 apiRouter.get("/salons/location", SalonFetch);
+apiRouter.post("/salons/locsex", SalonFetchFil);
 apiRouter.get("book/loc", RS);
 
 export default apiRouter;

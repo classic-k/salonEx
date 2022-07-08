@@ -8,7 +8,7 @@ import {
   address,
   directionB,
 } from "../map/index.js";
-import { getByMunicipal } from "../salon/index.js";
+import { getByMunicipal, fetchBySexLoc } from "../salon/index.js";
 import { fetchCity } from "../auth/index.js";
 
 export const Reverse = expressAsyncHandler(async (req, res) => {
@@ -121,6 +121,14 @@ export const DirectionBR = expressAsyncHandler(async (req, res) => {
   }
 
   //NB Filter salons to exclude IDs
+});
+
+export const SalonFetchFil = expressAsyncHandler(async (req, res) => {
+  const loc = req.body.loc;
+  const sex = req.body.sex;
+  const salons = await fetchBySexLoc(sex, loc);
+
+  res.send({ salons });
 });
 
 export const GetClose = () => {};

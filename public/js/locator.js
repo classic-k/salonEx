@@ -1,8 +1,154 @@
 var ugeo = [];
-var salons = [];
+var stores = [];
+var salons = [
+  {
+    id: "62a9ad89e2180160b3b5b1dc",
+    name: "Divine Touch",
+    email: "div@divine.com",
+    address: "Lagos Island, Lagos",
+    city: "Lagos",
+    locName: "Island",
+    country: "Nigeria",
+    coordinate: ["6.537216", "3.3718272"],
+    phone: "080902211011",
+    description: "Unisex Salon",
+    sex: "2",
+  },
+  {
+    id: "62c2f98a350d4f0a659e8385",
+    name: "Immaculate",
+    email: "imma@imma.com",
+    address: "Lekki, Lagos",
+    city: "Lagos",
+    locName: "Lekki",
+    country: "Nigeria",
+    coordinate: ["6.44614", "3.46019"],
+    phone: "08020998811",
+    description: "High class salon",
+    sex: "2",
+  },
+  {
+    id: "62c2f9cd350d4f0a659e8386",
+    name: "Brain Beauty",
+    email: "ella@brain.com",
+    address: "Magodo, Lagos",
+    city: "Lagos",
+    locName: "Magodo",
+    country: "Nigeria",
+    coordinate: ["6.61398", "3.37528"],
+    phone: "08020998822",
+    description: "Exclusive touch",
+    sex: "0",
+  },
+  {
+    id: "62c2fa04350d4f0a659e8387",
+    name: "Oluomo Salons",
+    email: "mc@nurtw.com",
+    address: "Oshodi, Lagos",
+    city: "Lagos",
+    locName: "Oshodi",
+    country: "Nigeria",
+    coordinate: ["5.74117", "6.88042"],
+    phone: "09020998822",
+    description: "MC Oluomo",
+    sex: "1",
+  },
+  {
+    id: "62c2fa31350d4f0a659e8388",
+    name: "Westminister Salons",
+    email: "west@west.com",
+    address: "Apapa, Lagos",
+    city: "Lagos",
+    locName: "Apapa",
+    country: "Nigeria",
+    coordinate: ["6.44519", "3.36837"],
+    phone: "08130998822",
+    description: "Shipping Yard",
+    sex: "0",
+  },
+  {
+    id: "62c2fa59350d4f0a659e8389",
+    name: "Awa Wa Salons",
+    email: "base@ikd.com",
+    address: "Ikorodu, Lagos",
+    city: "Lagos",
+    locName: "Ikorodu",
+    country: "Nigeria",
+    coordinate: ["6.60357", "3.57703"],
+    phone: "08130991231",
+    description: "Headquarter",
+    sex: "0",
+  },
+  {
+    id: "62c2faa9350d4f0a659e838b",
+    name: "BestHair Salon",
+    email: "info@besthair.com",
+    address: "Ojodu, Berger",
+    city: "Lagos",
+    locName: "Ojodu",
+    country: "Nigeria",
+    coordinate: ["6.6470", "3.3742"],
+    phone: "08130001231",
+    description: "Headquarter",
+    sex: "0",
+  },
+  {
+    id: "62c2fadd350d4f0a659e838c",
+    name: "Excellent Salon",
+    email: "info@excel.com",
+    address: "Ikotun, Egbe",
+    city: "Lagos",
+    locName: "Ikotun",
+    country: "Nigeria",
+    coordinate: ["6.5631", "3.2506"],
+    phone: "090802211011",
+    description: "Unisex Salon",
+    sex: "2",
+  },
+  {
+    id: "62c2fb09350d4f0a659e838d",
+    name: "Angels Palace",
+    email: "info@angels.com",
+    address: "Ilupeju, Lagos",
+    city: "Lagos",
+    locName: "Ilupeju",
+    country: "Nigeria",
+    coordinate: ["6.5536", "3.3567"],
+    phone: "090802211342",
+    description: "Unisex Salon",
+    sex: "2",
+  },
+  {
+    id: "62c2fb65350d4f0a659e838f",
+    name: "Art Land touch",
+    email: "art@landtouch.com",
+    address: "Festac Town, Lagos",
+    city: "Lagos",
+    locName: "Festac",
+    country: "Nigeria",
+    coordinate: ["6.4703", "3.2818"],
+    phone: "080902211011",
+    description: "Unisex Salon",
+    sex: "2",
+  },
+  {
+    id: "62c2fb93350d4f0a659e8390",
+    name: "Homeland Touch",
+    email: "info@homeland.com",
+    address: "Onilu, Lagos",
+    city: "Lagos",
+    locName: "Onilu",
+    country: "Nigeria",
+    coordinate: ["6.5359", "3.2483"],
+    phone: "080230011011",
+    description: "Unisex Salon",
+    sex: "2",
+  },
+];
 var coordinates = [];
-var routes = {},
-  pipeline;
+var routes = {};
+var salonsHtml = [];
+var pipeline;
 var ds,
   map,
   popup,
@@ -100,151 +246,6 @@ const geoLocation = () => {
   );
 };
 const loadData = () => {
-  salons = [
-    {
-      id: "62a9ad89e2180160b3b5b1dc",
-      name: "Divine Touch",
-      email: "div@divine.com",
-      address: "Lagos, Lagos",
-      city: "Lagos",
-      locName: "",
-      country: "Nigeria",
-      coordinate: ["6.537216", "3.3718272"],
-      phone: "080902211011",
-      description: "Unisex Salon",
-      sex: "2",
-    },
-    {
-      id: "62c2f98a350d4f0a659e8385",
-      name: "Immaculate",
-      email: "imma@imma.com",
-      address: "Lekki, Lagos",
-      city: "Lagos",
-      locName: "",
-      country: "Nigeria",
-      coordinate: ["6.44614", "3.46019"],
-      phone: "08020998811",
-      description: "High class salon",
-      sex: "2",
-    },
-    {
-      id: "62c2f9cd350d4f0a659e8386",
-      name: "Brain Beauty",
-      email: "ella@brain.com",
-      address: "Magodo, Lagos",
-      city: "Lagos",
-      locName: "",
-      country: "Nigeria",
-      coordinate: ["6.61398", "3.37528"],
-      phone: "08020998822",
-      description: "Exclusive touch",
-      sex: "0",
-    },
-    {
-      id: "62c2fa04350d4f0a659e8387",
-      name: "Oluomo Salons",
-      email: "mc@nurtw.com",
-      address: "Oshodi, Lagos",
-      city: "Lagos",
-      locName: "",
-      country: "Nigeria",
-      coordinate: ["5.74117", "6.88042"],
-      phone: "09020998822",
-      description: "MC Oluomo",
-      sex: "1",
-    },
-    {
-      id: "62c2fa31350d4f0a659e8388",
-      name: "Westminister Salons",
-      email: "west@west.com",
-      address: "Apapa, Lagos",
-      city: "Lagos",
-      locName: "",
-      country: "Nigeria",
-      coordinate: ["6.44519", "3.36837"],
-      phone: "08130998822",
-      description: "Shipping Yard",
-      sex: "0",
-    },
-    {
-      id: "62c2fa59350d4f0a659e8389",
-      name: "Awa Wa Salons",
-      email: "base@ikd.com",
-      address: "Ikorodu, Lagos",
-      city: "Lagos",
-      locName: "",
-      country: "Nigeria",
-      coordinate: ["6.60357", "3.57703"],
-      phone: "08130991231",
-      description: "Headquarter",
-      sex: "0",
-    },
-    {
-      id: "62c2faa9350d4f0a659e838b",
-      name: "BestHair Salon",
-      email: "info@besthair.com",
-      address: "Ojodu, Berger",
-      city: "Lagos",
-      locName: "Ojodu",
-      country: "Nigeria",
-      coordinate: ["6.6470", "3.3742"],
-      phone: "08130001231",
-      description: "Headquarter",
-      sex: "0",
-    },
-    {
-      id: "62c2fadd350d4f0a659e838c",
-      name: "Excellent Salon",
-      email: "info@excel.com",
-      address: "Ikotun, Egbe",
-      city: "Lagos",
-      locName: "Ikotun",
-      country: "Nigeria",
-      coordinate: ["6.5631", "3.2506"],
-      phone: "090802211011",
-      description: "Unisex Salon",
-      sex: "2",
-    },
-    {
-      id: "62c2fb09350d4f0a659e838d",
-      name: "Angels Palace",
-      email: "info@angels.com",
-      address: "Ilupeju, Lagos",
-      city: "Lagos",
-      locName: "Ilupeju",
-      country: "Nigeria",
-      coordinate: ["6.5536", "3.3567"],
-      phone: "090802211342",
-      description: "Unisex Salon",
-      sex: "2",
-    },
-    {
-      id: "62c2fb65350d4f0a659e838f",
-      name: "Art Land touch",
-      email: "art@landtouch.com",
-      address: "Festac Town, Lagos",
-      city: "Lagos",
-      locName: "Festac",
-      country: "Nigeria",
-      coordinate: ["6.4703", "3.2818"],
-      phone: "080902211011",
-      description: "Unisex Salon",
-      sex: "2",
-    },
-    {
-      id: "62c2fb93350d4f0a659e8390",
-      name: "Homeland Touch",
-      email: "info@homeland.com",
-      address: "Onilu, Lagos",
-      city: "Lagos",
-      locName: "Onilu",
-      country: "Nigeria",
-      coordinate: ["6.5359", "3.2483"],
-      phone: "080230011011",
-      description: "Unisex Salon",
-      sex: "2",
-    },
-  ];
   //  ds.add(new atlas.data.LineString([ugeo, [3.37528, 6.61398]]));
   var feats = makeFeatures(salons, ugeo);
   feats = new atlas.data.FeatureCollection(feats);
@@ -278,6 +279,7 @@ function makeFeatures(salons) {
       city: salon["city"],
       ind: ind,
     });
+    salonsHtml.push(salonHtml(salon));
     feature["id"] = salon["id"];
     features.push(feature);
   });
@@ -286,17 +288,17 @@ function makeFeatures(salons) {
 }
 
 function salonHtml(props, ind) {
+  var disList = ["address", "phone", "sex", "description"];
   var html = [];
 
   html.push("<div class='listItem' onclick=\"itemClicked('", ind, "')\">");
-  var attrs = Object.keys(props);
-  attrs = attrs.filter((val) => val !== "coordinate" || val !== "id");
-
-  for (var i = 0; i < attrs.length; i++) {
-    var val = attrs[i];
-    if (val === "distances")
-      html.push("<span class='seItem'>", props[val], "miles away</span>");
-    else html.push("<span class='seItem'>", val, props[val], "</span>");
+  //var attrs = Object.keys(props);
+  //attrs = attrs.filter((val) => val !== "coordinate" || val !== "id");
+  html.push("<div class='listItem-title'>", props["name"], "</div>");
+  // html.push("<span class='seItem'>", val, " ", props[val], "</span><br>");
+  for (var i = 0; i < disList.length; i++) {
+    var val = disList[i];
+    html.push("<span class='seItem'>", val, ": ", props[val], "</span><br>");
   }
 
   html.push("</div>");
@@ -313,10 +315,6 @@ const getPipeLine = (map) => {
 
 const route = () => {
   var routeURL = new atlas.service.RouteURL(pipeline);
-  //console.log(coordinates);
-  //st = [ugeo[1], ugeo[0]];
-  // coordinates = coordinates.filter((val) => st !== val);
-  //console.log(coordinates);
 
   coordinates.forEach((val, ind) => {
     // let en = [val[1], val[0]];
@@ -379,4 +377,73 @@ const popHtml = (data) => {
   //getOpenTillTime(properties),
 };
 
-const addressReverse = (address) => {};
+// dummy use array but real reverse
+const addressReverse = (address) => {
+  const searchUrl = new atlas.service.SearchURL(pipeline);
+
+  searchUrl
+    .searchAddress(atlas.service.Aborter.timeout(10000), address, {
+      countrySet: ["NG"],
+      entityType: "municipality",
+      view: "Auto",
+      limit: 3,
+    })
+    .then((result) => {
+      var data = result.geojson.getFeatures();
+      console.log("Done");
+      var feature = data.features[0];
+      var mun = feature.properties.address.municipality;
+      var subMun = feature.properties.address.municipalitySubdivision;
+      console.log(mun, subMun);
+      console.log(data);
+    });
+};
+//Load from DB
+const fetchSalon = (address) => {
+  //addressReverse(address)
+
+  stores = salons.filter((val) => {
+    let locname = val.locName;
+
+    return locname.includes(address);
+  });
+  var results = [];
+  let c = 0;
+  stores.forEach((salon) => {
+    //console.log(salon);
+    let html = salonHtml(salon, c);
+    c += 1;
+    results.push(html);
+  });
+  let panel = document.getElementById("listPanel");
+  panel.innerHTML = results.join("");
+  var feats = makeFeatures(salons);
+  features = new atlas.data.FeatureCollection(feats);
+  var cen = stores[0];
+  var coords = [
+    parseFloat(cen["coordinate"][1]),
+    parseFloat(cen["coordinate"][0]),
+  ];
+  ds.add(features);
+  map.setCamera({
+    center: coords,
+  });
+  //ds.setShapes(features);
+  /* 
+  var url = "search Url"
+  fetch(url, {method:"post", })
+  */
+};
+
+const itemClicked = (ind) => {
+  var salon = stores[ind];
+
+  var coords = [
+    parseFloat(salon["coordinate"][1]),
+    parseFloat(salon["coordinate"][0]),
+  ];
+  map.setCamera({
+    center: coords,
+  });
+  // Center map around the selected salon
+};

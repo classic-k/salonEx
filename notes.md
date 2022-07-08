@@ -29,4 +29,5 @@ Popup and search box design
 search algo: use location to fetch from db using or for add,city,locname
 include filter option in frontend for sex,
 
-Current: Define api route for salon address db search and sex filter integrate with frontend and test
+Current: Define api route for salon address db search and sex filter integrate with frontend
+Search should display salons ds in map and make first result map center

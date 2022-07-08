@@ -17,6 +17,14 @@
 
     <!-- Add a reference to the Azure Maps Services Module JavaScript file. -->
     <script src="https://atlas.microsoft.com/sdk/javascript/service/2/atlas-service.min.js"></script>
+    <script>
+      const search = () => {
+        var adds = document.querySelector("#searchTbx");
+        let val = adds.value;
+        //console.log(val);
+        fetchSalon(val);
+      };
+    </script>
     <link href="/css/locator.css" rel="stylesheet" />
   </head>
   <body onload="initialise()">
@@ -27,8 +35,21 @@
       <div class="searchPanel">
         <div>
           <input id="searchTbx" type="search" placeholder="Find a store" />
-          <button id="searchBtn" class="btn" title="Search"></button>
+          <button
+            id="searchBtn"
+            class="btn"
+            onclick="search()"
+            title="Search"
+          ></button>
         </div>
+        <!--
+        <div class="filterPanel">
+          Unisex:
+          <input type="checkbox" class="bs" name="sex" value="unisex" checked />
+          Male:
+          <input type="checkbox" class="bs" name="sex" value="unisex" /> Female:
+          <input type="checkbox" class="bs" name="sex" value="unisex" />
+        </div>-->
       </div>
       <div id="listPanel"></div>
 
